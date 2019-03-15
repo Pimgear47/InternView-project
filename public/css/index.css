@@ -1,0 +1,31 @@
+@font-face{
+    font-family: 'Prompt-Regular';
+    src: url('/fonts/Prompt-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Prompt-Medium';
+    src: url('/fonts/Prompt-Medium.ttf');
+}
+
+@font-face{
+    font-family: 'Prompt-Bold';
+    src: url('/fonts/Prompt-Bold.ttf');
+}
+
+@font-face{
+    font-family: 'coiny-regular';
+    src: url('/fonts/coiny-regular.ttf')
+}
+
+้h1, h1, h2, h3, h4, h5, h6, .title {
+    font-family: 'Prompt-Medium';
+}
+
+body{
+    background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
