@@ -19,17 +19,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css"> 
 
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-2 shadow ">
             <div class="container">
-                <a class="navbar-brand" href="#">THE INTERNVIEW</a>
+                <a class="navbar-brand" href="#"><img src="images/All_element/Group-120.png" height="18%"
+                        width="18%">THE INTERNVIEW</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -82,7 +81,6 @@
             </div>
     </div>
     </nav>
-
     <main class="py-4">
         @yield('content')
     </main>
