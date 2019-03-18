@@ -11,7 +11,7 @@
             <th>แก้ไข</th>
             <th>ลบ</th>
           </tr>
-          <tr v-for="(ListOrg,index) in ListOrgs">
+          <tr v-for="(ListOrg,index) in ListOrgs" :key="ListOrg.id">
             <td>{{ListOrg.id}}</td>
             <td class="title">{{ListOrg.name_org}}</td>
             <td>{{ListOrg.rating}}</td>

@@ -37316,7 +37316,7 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _vm._l(_vm.ListOrgs, function(ListOrg, index) {
-                return _c("tr", [
+                return _c("tr", { key: ListOrg.id }, [
                   _c("td", [_vm._v(_vm._s(ListOrg.id))]),
                   _vm._v(" "),
                   _c("td", { staticClass: "title" }, [
