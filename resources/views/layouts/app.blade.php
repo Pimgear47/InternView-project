@@ -15,14 +15,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
+    <?php
+    $page = basename($_SERVER['PHP_SELF']);
+    ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-4 shadow ">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="images/All_element/Group-120.png" height="18%" width="18%">THE
+            <a class="navbar-brand" href="/"><img src="{{ asset('images/All_element/Group-120.png') }}" height="18%" width="18%">THE
                 INTERNVIEW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,13 +33,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
+                    <li <?php if($page == 'index.php'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
+                        <a class="nav-link" href="/">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                    <li
+                        <?php if($page == 'listorgs'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
+                        <a class="nav-link" href="/listorgs">List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Services</a>
