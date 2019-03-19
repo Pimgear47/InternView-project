@@ -1937,6 +1937,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -1962,6 +1972,7 @@ __webpack_require__.r(__webpack_exports__);
       ListOrgs: [],
       ListOrg: {
         id: 0,
+        picture: "",
         name_org: "",
         rating: 0
       }
@@ -37305,45 +37316,36 @@ var render = function() {
     "div",
     { staticClass: "container col-md-10 col-sm-9 col-lg-10 mb-5" },
     [
-      _c("div", { staticClass: "card border-0 shadow" }, [
-        _c("div", { staticClass: "row p-5" }, [
-          _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")]),
-          _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table table-bodered mt-3" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.ListOrgs, function(ListOrg, index) {
-                return _c("tr", { key: ListOrg.id }, [
-                  _c("td", [_vm._v(_vm._s(ListOrg.id))]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "title" }, [
-                    _vm._v(_vm._s(ListOrg.name_org))
+      _c("div", { staticClass: "card border-0 shadow p-5" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row ml-3 mr-3" },
+          _vm._l(_vm.ListOrgs, function(ListOrg, index) {
+            return _c(
+              "div",
+              { key: ListOrg.id, staticClass: "card col-lg-12 p-2 mb-2" },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("p", { staticStyle: { "text-align": "center" } }, [
+                      _c("img", {
+                        staticStyle: {
+                          height: "100%",
+                          width: "100%",
+                          "object-fit": "contain"
+                        },
+                        attrs: { src: "images/data/List/" + ListOrg.picture }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(ListOrg.rating))]),
-                  _vm._v(" "),
-                  _c("td", [
+                  _c("div", { staticClass: "col-md-10 mt-2" }, [
                     _c(
                       "a",
                       {
-                        staticClass: "btn btn-warning",
-                        attrs: {
-                          href: "/listorgs/" + ListOrg.id + "/edit",
-                          role: "button"
-                        }
-                      },
-                      [_vm._v("Edit")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-danger",
+                        staticClass: "btn btn-sm btn-danger float-right",
                         attrs: { href: "javascript:;", role: "button" },
                         on: {
                           click: function($event) {
@@ -37352,23 +37354,32 @@ var render = function() {
                         }
                       },
                       [_vm._v("Delete")]
+                    ),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "title" }, [
+                      _vm._v(_vm._s(ListOrg.name_org))
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", [_vm._v("Rating: " + _vm._s(ListOrg.rating))]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-block btn-warning",
+                        attrs: {
+                          href: "/listorgs/" + ListOrg.id + "/edit",
+                          role: "button"
+                        }
+                      },
+                      [_vm._v("Edit")]
                     )
                   ])
                 ])
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary mb-1",
-              attrs: { href: "/listorgs/create", role: "button" }
-            },
-            [_vm._v("Add Data")]
-          )
-        ])
+              ]
+            )
+          }),
+          0
+        )
       ])
     ]
   )
@@ -37378,16 +37389,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { staticClass: "title" }, [
-      _c("th", [_vm._v("รหัส")]),
+    return _c("div", { staticClass: "row mb-2" }, [
+      _c("div", { staticClass: "col-md-10" }, [
+        _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")])
+      ]),
       _vm._v(" "),
-      _c("th", [_vm._v("ชื่อ")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Rating")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("แก้ไข")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("ลบ")])
+      _c("div", { staticClass: "col-md-2" }, [
+        _c("h2", [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary float-right",
+              attrs: { href: "/listorgs/create", role: "button" }
+            },
+            [_vm._v("Add Data")]
+          )
+        ])
+      ])
     ])
   }
 ]

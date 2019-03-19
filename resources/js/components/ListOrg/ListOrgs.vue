@@ -1,34 +1,44 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
-    <div class="card border-0 shadow">
-      <div class="row p-5">
-        <h2>รายชื่อบริษัทและองค์กร</h2>
-        <table class="table table-bodered mt-3">
-          <tr class="title">
-            <th>รหัส</th>
-            <th>ชื่อ</th>
-            <th>Rating</th>
-            <th>แก้ไข</th>
-            <th>ลบ</th>
-          </tr>
-          <tr v-for="(ListOrg,index) in ListOrgs" :key="ListOrg.id">
-            <td>{{ListOrg.id}}</td>
-            <td class="title">{{ListOrg.name_org}}</td>
-            <td>{{ListOrg.rating}}</td>
-            <td>
-              <a :href="'/listorgs/'+ ListOrg.id +'/edit'" class="btn btn-warning" role="button">Edit</a>
-            </td>
-            <td>
+    <div class="card border-0 shadow p-5">
+      <div class="row mb-2">
+        <div class="col-md-10">
+          <h2>รายชื่อบริษัทและองค์กร</h2>
+        </div>
+        <div class="col-md-2">
+          <h2>
+            <a href="/listorgs/create" class="btn btn-primary float-right" role="button">Add Data</a>
+          </h2>
+        </div>
+      </div>
+      <div class="row ml-3 mr-3">
+        <div class="card col-lg-12 p-2 mb-2" v-for="(ListOrg, index) in ListOrgs" :key="ListOrg.id">
+          <div class="row">
+            <div class="col-md-2">
+              <p style="text-align:center;">
+                <img
+                  :src="'images/data/List/' + ListOrg.picture"
+                  style="height: 100%; width: 100%; object-fit: contain"
+                >
+              </p>
+            </div>
+            <div class="col-md-10 mt-2">
               <a
                 href="javascript:;"
-                class="btn btn-danger"
+                class="btn btn-sm btn-danger float-right"
                 role="button"
                 v-on:click="deleteOrg(ListOrg.id,index)"
               >Delete</a>
-            </td>
-          </tr>
-        </table>
-        <a href="/listorgs/create" class="btn btn-primary mb-1" role="button">Add Data</a>
+              <h5 class="title">{{ListOrg.name_org}}</h5>
+              <h5>Rating: {{ListOrg.rating}}</h5>
+              <a
+                :href="'/listorgs/'+ ListOrg.id +'/edit'"
+                class="btn btn-block btn-warning"
+                role="button"
+              >Edit</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -45,9 +55,9 @@ export default {
         this.ListOrgs = response.data;
       });
     },
-    deleteOrg(id,index) {
-      axios.delete("api/listorgs/"+id).then(response => {
-        this.ListOrgs.splice(index,1);
+    deleteOrg(id, index) {
+      axios.delete("api/listorgs/" + id).then(response => {
+        this.ListOrgs.splice(index, 1);
       });
     }
   },
@@ -56,6 +66,7 @@ export default {
       ListOrgs: [],
       ListOrg: {
         id: 0,
+        picture: "",
         name_org: "",
         rating: 0
       }

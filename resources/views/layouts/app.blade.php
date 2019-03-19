@@ -25,7 +25,8 @@
     ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-4 shadow ">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="{{ asset('images/All_element/Group-120.png') }}" height="18%" width="18%">THE
+            <a class="navbar-brand" href="/"><img src="{{ asset('images/All_element/Group-120.png') }}" height="18%"
+                    width="18%">THE
                 INTERNVIEW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +34,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li <?php if($page == 'index.php'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
+                    <li
+                        <?php if($page == 'index.php'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
                         <a class="nav-link" href="/">Home
                             <span class="sr-only">(current)</span>
                         </a>
