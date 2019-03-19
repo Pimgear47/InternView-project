@@ -37325,15 +37325,18 @@ var render = function() {
           _vm._l(_vm.ListOrgs, function(ListOrg, index) {
             return _c(
               "div",
-              { key: ListOrg.id, staticClass: "card col-lg-12 p-2 mb-2" },
+              {
+                key: ListOrg.id,
+                staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+              },
               [
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-2" }, [
                     _c("p", { staticStyle: { "text-align": "center" } }, [
                       _c("img", {
                         staticStyle: {
-                          height: "100%",
-                          width: "100%",
+                          height: "90%",
+                          width: "90%",
                           "object-fit": "contain"
                         },
                         attrs: { src: "images/data/List/" + ListOrg.picture }
@@ -37389,7 +37392,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-2" }, [
+    return _c("div", { staticClass: "row mb-3" }, [
       _c("div", { staticClass: "col-md-10" }, [
         _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")])
       ]),

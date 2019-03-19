@@ -1,7 +1,7 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow p-5">
-      <div class="row mb-2">
+      <div class="row mb-3">
         <div class="col-md-10">
           <h2>รายชื่อบริษัทและองค์กร</h2>
         </div>
@@ -12,13 +12,13 @@
         </div>
       </div>
       <div class="row ml-3 mr-3">
-        <div class="card col-lg-12 p-2 mb-2" v-for="(ListOrg, index) in ListOrgs" :key="ListOrg.id">
+        <div class="card-wo-r shadow col-lg-12 p-2 mb-2" v-for="(ListOrg, index) in ListOrgs" :key="ListOrg.id">
           <div class="row">
             <div class="col-md-2">
               <p style="text-align:center;">
                 <img
                   :src="'images/data/List/' + ListOrg.picture"
-                  style="height: 100%; width: 100%; object-fit: contain"
+                  style="height: 90%; width: 90%; object-fit: contain"
                 >
               </p>
             </div>
