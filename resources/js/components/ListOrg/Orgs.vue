@@ -1,24 +1,12 @@
 <template>
-  <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
-    <div class="card border-0 shadow p-5">
-      <div class="row mb-3">
-        <div class="col-md-10">
-          <h2>รายชื่อบริษัทและองค์กร</h2>
-        </div>
-        <div class="col-md-2">
-          <h2>
-            <a href="/listorgs/create" class="btn btn-primary float-right" role="button">Add Data</a>
-          </h2>
-        </div>
-      </div>
-      <div class="row ml-3 mr-3">
+      <div class="row">
         <div class="card-wo-r shadow col-lg-12 p-2 mb-2" v-for="(ListOrg, index) in ListOrgs" :key="ListOrg.id">
           <div class="row">
             <div class="col-md-2">
               <p style="text-align:center;">
                 <img
                   :src="'images/data/List/' + ListOrg.picture"
-                  style="height: 90%; width: 90%; object-fit: contain"
+                  style="height: 100%; width: 100%; object-fit: contain"
                 >
               </p>
             </div>
@@ -29,19 +17,17 @@
                 role="button"
                 v-on:click="deleteOrg(ListOrg.id,index)"
               >Delete</a>
-              <h5 class="title">{{ListOrg.name_org}}</h5>
-              <h5>Rating: {{ListOrg.rating}}</h5>
+              <h2 class="txt-bold">{{ListOrg.name_org}}</h2>
               <a
                 :href="'/listorgs/'+ ListOrg.id +'/edit'"
-                class="btn btn-block btn-warning"
+                class="btn btn-sm btn-warning float-right"
                 role="button"
               >Edit</a>
+              <h2 class="txt-bold">Rating: {{ListOrg.rating}}</h2>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>

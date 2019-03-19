@@ -7,9 +7,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('search-main', require('./components/SearchMain.vue').default);
 
 
-Vue.component('list-orgs', require('./components/ListOrg/ListOrgs.vue').default);
+Vue.component('list-page', require('./components/ListOrg/ListPage.vue').default);
+Vue.component('orgs', require('./components/ListOrg/Orgs.vue').default);
 Vue.component('edit', require('./components/ListOrg/Edit.vue').default);
 Vue.component('create', require('./components/ListOrg/Create.vue').default);
+Vue.component('search', require('./components/ListOrg/Search.vue').default);
 
 const app = new Vue({
     el: '#app'

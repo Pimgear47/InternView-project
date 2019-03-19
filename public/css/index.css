@@ -14,11 +14,21 @@
 }
 
 @font-face {
-    font-family: 'coiny-regular';
-    src: url('/fonts/coiny-regular.ttf')
+    font-family: 'RSU-Bold';
+    src: url('/fonts/RSU-Text_Bold.ttf')
 }
 
-้h1,
+@font-face {
+    font-family: 'RSU-Italic';
+    src: url('/fonts/RSU-Text_Italic.ttf')
+}
+
+@font-face {
+    font-family: 'RSU-Regular';
+    src: url('/fonts/RSU-Text_Regular.ttf')
+}
+
+h1,
 h1,
 h2,
 h3,
@@ -27,6 +37,14 @@ h5,
 h6,
 .title {
     font-family: 'Prompt-Medium';
+}
+
+.txt-regular {
+    font-family: 'RSU-Regular';
+}
+
+.txt-bold {
+    font-family: 'RSU-Bold';
 }
 
 body {
