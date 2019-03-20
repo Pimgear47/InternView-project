@@ -10,9 +10,9 @@
             <a href="/listorgs/create" class="btn btn-primary float-right" role="button">Add Data</a>
           </h2>
         </div>
-        <div class="row mt-3 p-2">
-          <div class="col-md-8">
-            <div class="row">
+        <div class="col-md-12 mt-3">
+          <div class="row">
+            <div class="col-md-8 col-lg-9">
               <div
                 class="card-wo-r shadow col-lg-12 p-2 mb-2"
                 v-for="(ListOrg, index) in filteredOrgs"
@@ -45,23 +45,32 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-wo-r shadow p-3">
-              <p class="title">Search :</p>
-              <input v-model="search" type="text" class="form-control mb-3" placeholder="Search">
-              <div class="form-group">
-                <label class="title" for="sel1">สายงานที่สนใจ :</label>
-                <select class="form-control" id="sel1">
-                  <option>Software</option>
-                  <option>Hardware</option>
-                  <option>Network</option>
-                </select>
+            <div class="col-md-4 col-lg-3 float-right mb-2">
+              <div class="card-wo-r shadow p-3">
+                <h5>ค้นหาด้วยชื่อ</h5>
+                <p class="title">Search :</p>
+                <input v-model="search" type="text" class="form-control mb-3" placeholder="Search">
+                <hr>
+                <h5>ค้นหาด้วยข้อมูลอื่นๆ</h5>
+                <div class="form-group">
+                  <label class="title" for="sel1">สายงานที่สนใจ :</label>
+                  <select class="form-control" id="sel1" v-model="type">
+                    <option>Software</option>
+                    <option>Hardware</option>
+                    <option>Network</option>
+                  </select>
+                </div>
+                <label class="title" for="customRange3">Rating : {{rating}}</label>
+                <input v-model="rating"
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="5"
+                  step="0.5"
+                  id="customRange3"
+                >
+                <button class="btn btn-block btn-primary" type="submit">Submit</button>
               </div>
-              <label class="title" for="customRange3">Rating :</label>
-              <input type="range" class="custom-range" min="0" max="5" step="0.5" id="customRange3">
-              <hr>
-              <button class="btn btn-block btn-primary" type="submit">Submit</button>
             </div>
           </div>
         </div>
@@ -96,15 +105,17 @@ export default {
         name_org: "",
         rating: 0
       },
-      search:''
+      search: "",
+      type: "",
+      rating: ""
     };
   },
   computed: {
-    filteredOrgs: function(){
-      return this.ListOrgs.filter((ListOrg)=>{
-        return ListOrg.name_org.match(this.search)
-      })
+    filteredOrgs: function() {
+      return this.ListOrgs.filter(ListOrg => {
+        return ListOrg.name_org.match(this.search);
+      });
     }
-  },
+  }
 };
 </script>
