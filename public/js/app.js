@@ -1928,6 +1928,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -1956,8 +2001,18 @@ __webpack_require__.r(__webpack_exports__);
         picture: "",
         name_org: "",
         rating: 0
-      }
+      },
+      search: ''
     };
+  },
+  computed: {
+    filteredOrgs: function filteredOrgs() {
+      var _this3 = this;
+
+      return this.ListOrgs.filter(function (ListOrg) {
+        return ListOrg.name_org.match(_this3.search);
+      });
+    }
   }
 });
 
@@ -37428,15 +37483,133 @@ var render = function() {
           _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "row mt-3 p-2" }, [
-            _c("div", { staticClass: "col-md-8" }, [_c("orgs")], 1),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "col-md-8" }, [
               _c(
                 "div",
-                { staticClass: "card-wo-r shadow p-3" },
-                [_c("search")],
-                1
+                { staticClass: "row" },
+                _vm._l(_vm.filteredOrgs, function(ListOrg, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: ListOrg.id,
+                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-2" }, [
+                          _c("p", { staticStyle: { "text-align": "center" } }, [
+                            _c("img", {
+                              staticStyle: {
+                                height: "100%",
+                                width: "100%",
+                                "object-fit": "contain"
+                              },
+                              attrs: {
+                                src: "images/data/List/" + ListOrg.picture
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-10 mt-2" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-sm btn-danger float-right",
+                              attrs: { href: "javascript:;", role: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteOrg(ListOrg.id, index)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          ),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-bold" }, [
+                            _vm._v(_vm._s(ListOrg.name_org))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-sm btn-warning float-right",
+                              attrs: {
+                                href: "/listorgs/" + ListOrg.id + "/edit",
+                                role: "button"
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-bold" }, [
+                            _vm._v("Rating: " + _vm._s(ListOrg.rating))
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                0
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "card-wo-r shadow p-3" }, [
+                _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control mb-3",
+                  attrs: { type: "text", placeholder: "Search" },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "title", attrs: { for: "customRange3" } },
+                  [_vm._v("Rating :")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "custom-range",
+                  attrs: {
+                    type: "range",
+                    min: "0",
+                    max: "5",
+                    step: "0.5",
+                    id: "customRange3"
+                  }
+                }),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-block btn-primary",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Submit")]
+                )
+              ])
             ])
           ])
         ])
@@ -37467,6 +37640,24 @@ var staticRenderFns = [
           },
           [_vm._v("Add Data")]
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "title", attrs: { for: "sel1" } }, [
+        _vm._v("สายงานที่สนใจ :")
+      ]),
+      _vm._v(" "),
+      _c("select", { staticClass: "form-control", attrs: { id: "sel1" } }, [
+        _c("option", [_vm._v("Software")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Hardware")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Network")])
       ])
     ])
   }
