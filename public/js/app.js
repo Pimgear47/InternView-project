@@ -1980,8 +1980,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -2013,7 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       search: "",
       type: "",
-      rating: ""
+      rating: "0"
     };
   },
   computed: {
@@ -2021,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       return this.ListOrgs.filter(function (ListOrg) {
-        return ListOrg.name_org.match(_this3.search);
+        return ListOrg.name_org.match(_this3.search) && ListOrg.rating >= parseInt(_this3.rating) && ListOrg.type.match(_this3.type);
       });
     }
   }
@@ -37565,8 +37563,6 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
                 _c("div", { staticClass: "card-wo-r shadow p-3" }, [
-                  _c("h5", [_vm._v("ค้นหาด้วยชื่อ")]),
-                  _vm._v(" "),
                   _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
                   _vm._v(" "),
                   _c("input", {
@@ -37591,15 +37587,11 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("h5", [_vm._v("ค้นหาด้วยข้อมูลอื่นๆ")]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c(
                       "label",
                       { staticClass: "title", attrs: { for: "sel1" } },
-                      [_vm._v("สายงานที่สนใจ :")]
+                      [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type) + " ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -37632,11 +37624,13 @@ var render = function() {
                         }
                       },
                       [
-                        _c("option", [_vm._v("Software")]),
+                        _c("option", [_vm._v("All")]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Hardware")]),
+                        _c("option", [_vm._v("software")]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Network")])
+                        _c("option", [_vm._v("hardware")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("network")])
                       ]
                     )
                   ]),
@@ -37644,7 +37638,7 @@ var render = function() {
                   _c(
                     "label",
                     { staticClass: "title", attrs: { for: "customRange3" } },
-                    [_vm._v("Rating : " + _vm._s(_vm.rating))]
+                    [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating))]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -37670,16 +37664,7 @@ var render = function() {
                         _vm.rating = $event.target.value
                       }
                     }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Submit")]
-                  )
+                  })
                 ])
               ])
             ])

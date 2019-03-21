@@ -19,12 +19,10 @@ class CreateListOrgsTable extends Migration
             $table->string('picture')->nullable();
             $table->longText('description')->nullable();
             $table->longText('address')->nullable();
+            $table->string('type')->default('All');
             $table->boolean('bnf_money')->nullable();
             $table->boolean('bnf_car')->nullable();
             $table->boolean('bnf_house')->nullable();
-            $table->boolean('software')->nullable();
-            $table->boolean('hardware')->nullable();
-            $table->boolean('network')->nullable();
             $table->integer('rating')->default(0);
             $table->timestamps();
         });

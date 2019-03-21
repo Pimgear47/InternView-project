@@ -12,6 +12,6 @@ class ListOrg extends Model
      * @var array
      */
     protected $fillable = [
-        'name_org', 'picture', 'description', 'address','bnf_money','bnf_car','bnf_house','software','hardware','network','rating'
+        'name_org', 'picture', 'description', 'address','type','bnf_money','bnf_car','bnf_house','rating'
     ];
 }

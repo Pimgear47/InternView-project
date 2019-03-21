@@ -47,21 +47,20 @@
             </div>
             <div class="col-md-4 col-lg-3 float-right mb-2">
               <div class="card-wo-r shadow p-3">
-                <h5>ค้นหาด้วยชื่อ</h5>
                 <p class="title">Search :</p>
                 <input v-model="search" type="text" class="form-control mb-3" placeholder="Search">
-                <hr>
-                <h5>ค้นหาด้วยข้อมูลอื่นๆ</h5>
                 <div class="form-group">
-                  <label class="title" for="sel1">สายงานที่สนใจ :</label>
+                  <label class="title" for="sel1">สายงานที่สนใจ : {{type}} </label>
                   <select class="form-control" id="sel1" v-model="type">
-                    <option>Software</option>
-                    <option>Hardware</option>
-                    <option>Network</option>
+                    <option>All</option>
+                    <option>software</option>
+                    <option>hardware</option>
+                    <option>network</option>
                   </select>
                 </div>
-                <label class="title" for="customRange3">Rating : {{rating}}</label>
-                <input v-model="rating"
+                <label class="title" for="customRange3">Rating ขั้นต่ำ : {{rating}}</label>
+                <input
+                  v-model="rating"
                   type="range"
                   class="custom-range"
                   min="0"
@@ -69,7 +68,6 @@
                   step="0.5"
                   id="customRange3"
                 >
-                <button class="btn btn-block btn-primary" type="submit">Submit</button>
               </div>
             </div>
           </div>
@@ -107,13 +105,15 @@ export default {
       },
       search: "",
       type: "",
-      rating: ""
+      rating: "0"
     };
   },
   computed: {
     filteredOrgs: function() {
       return this.ListOrgs.filter(ListOrg => {
-        return ListOrg.name_org.match(this.search);
+        return ListOrg.name_org.match(this.search) 
+        && ListOrg.rating >= parseInt(this.rating)
+        && ListOrg.type.match(this.type)
       });
     }
   }
