@@ -12,6 +12,7 @@ Vue.component('orgs', require('./components/ListOrg/Orgs.vue').default);
 Vue.component('edit', require('./components/ListOrg/Edit.vue').default);
 Vue.component('create', require('./components/ListOrg/Create.vue').default);
 Vue.component('search', require('./components/ListOrg/Search.vue').default);
+Vue.component('show-org', require('./components/ListOrg/ShowOrg.vue').default);
 
 const app = new Vue({
     el: '#app'

@@ -46,7 +46,8 @@ class ListOrgController extends Controller
      */
     public function show($id)
     {
-        //
+        $ListOrg=ListOrg::find($id);
+        return view('Page/List/show',compact('id'));
     }
 
     /**

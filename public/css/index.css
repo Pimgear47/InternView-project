@@ -60,6 +60,11 @@ body {
     font-weight: 200
 }
 
+.text-link {
+    font-size: 2rem;
+    font-weight: 200
+}
+
 image {
     vertical-align: middle;
 }

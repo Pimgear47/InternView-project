@@ -34,7 +34,10 @@
                       role="button"
                       v-on:click="deleteOrg(ListOrg.id,index)"
                     >Delete</a>
-                    <h2 class="txt-bold">{{ListOrg.name_org}}</h2>
+                    <a
+                      :href="'/listorgs/'+ ListOrg.id"
+                      class="txt-bold text-link"
+                    >{{ListOrg.name_org}}</a>
                     <a
                       :href="'/listorgs/'+ ListOrg.id +'/edit'"
                       class="btn btn-sm btn-warning float-right"
@@ -50,7 +53,7 @@
                 <p class="title">Search :</p>
                 <input v-model="search" type="text" class="form-control mb-3" placeholder="Search">
                 <div class="form-group">
-                  <label class="title" for="sel1">สายงานที่สนใจ : {{type}} </label>
+                  <label class="title" for="sel1">สายงานที่สนใจ : {{type}}</label>
                   <select class="form-control" id="sel1" v-model="type">
                     <option>All</option>
                     <option>software</option>
@@ -89,9 +92,16 @@ export default {
       });
     },
     deleteOrg(id, index) {
-      axios.delete("api/listorgs/" + id).then(response => {
-        this.ListOrgs.splice(index, 1);
-      });
+      if (confirm("Do you really want to delete?")) {
+        axios
+          .delete("api/listorgs/" + id)
+          .then(response => {
+            this.ListOrgs.splice(index, 1);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     }
   },
   data() {
@@ -111,9 +121,11 @@ export default {
   computed: {
     filteredOrgs: function() {
       return this.ListOrgs.filter(ListOrg => {
-        return ListOrg.name_org.match(this.search) 
-        && ListOrg.rating >= parseInt(this.rating)
-        && ListOrg.type.match(this.type)
+        return (
+          ListOrg.name_org.match(this.search) &&
+          ListOrg.rating >= parseInt(this.rating) &&
+          ListOrg.type.match(this.type)
+        );
       });
     }
   }
