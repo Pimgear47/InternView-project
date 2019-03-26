@@ -25,9 +25,10 @@
     ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-4 shadow ">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="{{ asset('images/All_element/Group-120.png') }}" height="18%"
-                    width="18%">THE
-                INTERNVIEW</a>
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('images/All_element/Group-120.png') }}" height="18%" width="18%">THE
+                INTERNVIEW
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,7 +46,7 @@
                         <a class="nav-link" href="/listorgs">List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="#">Annoucement</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
