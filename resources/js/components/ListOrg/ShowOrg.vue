@@ -8,6 +8,7 @@
       <div class="container mt-4 mb-3">
         <h2 class="title">{{name_org}}</h2>
         <h2 class="txt-regular">{{description}}</h2>
+        <hr>
       </div>
     </div>
   </div>
