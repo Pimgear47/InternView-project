@@ -32,7 +32,18 @@
                       :href="'/listorgs/'+ ListOrg.id"
                       class="txt-bold text-link"
                     >{{ListOrg.name_org}}</a>
-                    <h2 class="txt-bold">Rating: {{ListOrg.rating}}</h2>
+                    <div class="row p-3">
+                      <div>
+                      </div>
+                      <div class="inline text-left" v-for="i in parseInt(ListOrg.rating)">
+                        <img src="images/icon/Heart-icon.png">&nbsp;
+                      </div>
+                      <div class="inline text-left" v-if="ListOrg.rating%1!=0">
+                        <img src="images/icon/Heart-icon-half.png">
+                      </div>
+                      &nbsp;<h2 class="txt-bold">Rating: {{(Math.round(ListOrg.rating*2))/2}}/5</h2>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -50,14 +61,14 @@
                     <option>network</option>
                   </select>
                 </div>
-                <label class="title" for="customRange3">Rating ขั้นต่ำ : {{rating}}</label>
+                <label class="title" for="customRange3">Rating ขั้นต่ำ : {{rating_s}}</label>
                 <input
-                  v-model="rating"
+                  v-model="rating_s"
                   type="range"
                   class="custom-range"
                   min="0"
                   max="5"
-                  step="0.5"
+                  step="1"
                   id="customRange3"
                 >
               </div>
@@ -79,18 +90,6 @@ export default {
       axios.get("api/listorgs").then(response => {
         this.ListOrgs = response.data;
       });
-    },
-    deleteOrg(id, index) {
-      if (confirm("Do you really want to delete?")) {
-        axios
-          .delete("api/listorgs/" + id)
-          .then(response => {
-            this.ListOrgs.splice(index, 1);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
     }
   },
   data() {
@@ -104,7 +103,7 @@ export default {
       },
       search: "",
       type: "",
-      rating: "0"
+      rating_s: "0"
     };
   },
   computed: {
@@ -112,7 +111,7 @@ export default {
       return this.ListOrgs.filter(ListOrg => {
         return (
           ListOrg.name_org.match(this.search) &&
-          ListOrg.rating >= parseInt(this.rating) &&
+          Math.round(ListOrg.rating * 2) / 2 >= parseInt(this.rating_s) &&
           ListOrg.type.match(this.type)
         );
       });

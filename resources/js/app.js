@@ -12,6 +12,8 @@ Vue.component('edit', require('./components/ListOrg/Edit.vue').default);
 Vue.component('create', require('./components/ListOrg/Create.vue').default);
 Vue.component('show-org', require('./components/ListOrg/ShowOrg.vue').default);
 
+Vue.component('show-review', require('./components/ListOrg/ShowReview.vue').default);
+
 const app = new Vue({
     el: '#app'
 });

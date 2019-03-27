@@ -14,4 +14,8 @@ class ListOrg extends Model
     protected $fillable = [
         'name_org', 'picture', 'description', 'address','type','bnf_money','bnf_car','bnf_house','rating'
     ];
+
+    public function Review(){
+        return $this->hasMany(Review::class,'org_id');
+    }
 }

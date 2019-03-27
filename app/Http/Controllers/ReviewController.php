@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\ListOrg;
+use App\Review;
 
-class ListOrgController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class ListOrgController extends Controller
      */
     public function index()
     {
-        $listorgs=ListOrg::all();
-        return response()->json($listorgs);
+        //
     }
 
     /**
@@ -37,11 +35,7 @@ class ListOrgController extends Controller
      */
     public function store(Request $request)
     {
-        $listorg=new ListOrg();
-        $listorg->id=$request->get('id');
-        $listorg->name_org=$request->get('name_org');
-        $listorg->save();
-        return response()->json($listorg);
+        //
     }
 
     /**
@@ -52,8 +46,7 @@ class ListOrgController extends Controller
      */
     public function show($id)
     {
-        $listorg=ListOrg::with('Review')->find($id);
-        return response()->json($listorg);
+        //
     }
 
     /**
@@ -64,7 +57,7 @@ class ListOrgController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -76,10 +69,7 @@ class ListOrgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $listorg=ListOrg::find($id);
-        $listorg->name_org = $request->get('name_org');
-        $listorg->update();
-        return response()->json($listorg);
+        //
     }
 
     /**
@@ -90,8 +80,6 @@ class ListOrgController extends Controller
      */
     public function destroy($id)
     {
-        $listorg=ListOrg::find($id);
-        $listorg->delete();
-        return response()->json($listorg);
+        //
     }
 }

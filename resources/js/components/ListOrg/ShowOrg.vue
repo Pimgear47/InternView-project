@@ -9,6 +9,12 @@
         <h2 class="title">{{name_org}}</h2>
         <h2 class="txt-regular">{{description}}</h2>
         <hr>
+        <div id="columns-holder">
+          <div v-for="reviewE in orgsData.review" class="box">
+            <h3 class="txt-regular p-2">{{reviewE.description}}</h3>
+          </div>
+        </div>
+        <hr>
       </div>
     </div>
   </div>
@@ -19,27 +25,23 @@ export default {
   props: ["id"],
   data() {
     return {
+      orgsData: [],
       name_org: "",
       picture: "",
       headerpic: "",
-      description: ""
+      description: "",
     };
   },
   mounted() {
+    console.log(this.orgsData.length);
     axios.get("/api/listorgs/" + this.id).then(response => {
+      this.orgsData = response.data;
       var listorg = response.data;
       this.name_org = listorg.name_org;
       this.picture = listorg.picture;
       this.description = listorg.description;
       this.headerpic = listorg.headerpic;
     });
-  },
-  methods: {
-    updateUser() {
-      axios.put("/api/listorgs/" + this.id, {
-        name_org: this.name_org
-      });
-    }
   }
 };
 </script>

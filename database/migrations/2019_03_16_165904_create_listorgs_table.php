@@ -16,13 +16,11 @@ class CreateListOrgsTable extends Migration
         Schema::create('list_orgs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_org');
-            $table->string('picture')->nullable();
+            $table->string('picture')->default('default.jpg');
+            $table->string('headerpic')->default('no-preview.png');
             $table->longText('description')->nullable();
             $table->longText('address')->nullable();
             $table->string('type')->default('All');
-            $table->boolean('bnf_money')->nullable();
-            $table->boolean('bnf_car')->nullable();
-            $table->boolean('bnf_house')->nullable();
             $table->integer('rating')->default(0);
             $table->timestamps();
         });
