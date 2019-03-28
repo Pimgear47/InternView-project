@@ -1,7 +1,6 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
-      {{getReview.getUserName}}
       <img
         :src="'../images/data/List/' + orgData.headerpic"
         style="height: 100%; width: 100%; object-fit: contain;"

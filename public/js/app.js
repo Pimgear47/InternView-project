@@ -2334,7 +2334,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "usernow"],
   data: function data() {
@@ -38375,7 +38374,6 @@ var render = function() {
     { staticClass: "container col-md-10 col-sm-9 col-lg-10 mb-5" },
     [
       _c("div", { staticClass: "card border-0 shadow" }, [
-        _vm._v("\n    " + _vm._s(_vm.getReview.getUserName) + "\n    "),
         _c("img", {
           staticStyle: {
             height: "100%",
