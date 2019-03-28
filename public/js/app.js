@@ -2213,28 +2213,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
     return {
-      orgsData: [],
-      name_org: "",
-      picture: "",
-      headerpic: "",
-      description: ""
+      reviews: [],
+      orgData: {
+        name_org: "",
+        headerpic: "",
+        description: ""
+      }
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    console.log(this.orgsData.length);
     axios.get("/api/listorgs/" + this.id).then(function (response) {
-      _this.orgsData = response.data;
-      var listorg = response.data;
-      _this.name_org = listorg.name_org;
-      _this.picture = listorg.picture;
-      _this.description = listorg.description;
-      _this.headerpic = listorg.headerpic;
+      var ArrayData = response.data;
+      _this.orgData = ArrayData.ListOrg;
+      _this.reviews = ArrayData.Review.map(function (review) {
+        return {
+          description: review.description,
+          user: review.user,
+          rating: review.rating,
+          created_at: review.created_at
+        };
+      });
     });
   }
 });
@@ -37974,7 +37994,10 @@ var render = function() {
                               _vm._l(parseInt(ListOrg.rating), function(i) {
                                 return _c(
                                   "div",
-                                  { staticClass: "inline text-left" },
+                                  {
+                                    key: i.id,
+                                    staticClass: "inline text-left"
+                                  },
                                   [
                                     _c("img", {
                                       attrs: {
@@ -38190,14 +38213,16 @@ var render = function() {
             width: "100%",
             "object-fit": "contain"
           },
-          attrs: { src: "../images/data/List/" + _vm.headerpic }
+          attrs: { src: "../images/data/List/" + _vm.orgData.headerpic }
         }),
         _vm._v(" "),
         _c("div", { staticClass: "container mt-4 mb-3" }, [
-          _c("h2", { staticClass: "title" }, [_vm._v(_vm._s(_vm.name_org))]),
+          _c("h2", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.orgData.name_org))
+          ]),
           _vm._v(" "),
           _c("h2", { staticClass: "txt-regular" }, [
-            _vm._v(_vm._s(_vm.description))
+            _vm._v(_vm._s(_vm.orgData.description))
           ]),
           _vm._v(" "),
           _c("hr"),
@@ -38205,10 +38230,43 @@ var render = function() {
           _c(
             "div",
             { attrs: { id: "columns-holder" } },
-            _vm._l(_vm.orgsData.review, function(reviewE) {
-              return _c("div", { staticClass: "box" }, [
-                _c("h3", { staticClass: "txt-regular p-2" }, [
-                  _vm._v(_vm._s(reviewE.description))
+            _vm._l(_vm.reviews, function(review) {
+              return _c("div", { key: review.review_id, staticClass: "box" }, [
+                _c("div", { staticClass: "row p-2" }, [
+                  _c("div", { staticClass: "col-md-2" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("h2", { staticClass: "txt-regular" }, [
+                      _c("b", [
+                        _vm._v(
+                          _vm._s(review.user.firstname) +
+                            " " +
+                            _vm._s(review.user.lastname)
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h2", { staticClass: "txt-regular" }, [
+                      _vm._v("# " + _vm._s(review.created_at))
+                    ]),
+                    _vm._v(" "),
+                    _c("h2", { staticClass: "txt-regular" }, [
+                      _vm._v(_vm._s(review.description))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "row ml-1" },
+                      _vm._l(parseInt(review.rating), function(i) {
+                        return _c(
+                          "div",
+                          { key: i.id, staticClass: "like-icon" },
+                          [_vm._v("❤  ")]
+                        )
+                      }),
+                      0
+                    )
+                  ])
                 ])
               ])
             }),

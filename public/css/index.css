@@ -223,3 +223,7 @@ body {
     page-break-inside: avoid;
     break-inside: avoid;
 }
+
+.like-icon {
+    color: rgb(233, 54, 40);
+}

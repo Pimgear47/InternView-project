@@ -35,7 +35,7 @@
                     <div class="row p-3">
                       <div>
                       </div>
-                      <div class="inline text-left" v-for="i in parseInt(ListOrg.rating)">
+                      <div class="inline text-left" v-for="i in parseInt(ListOrg.rating)" :key="i.id">
                         <img src="images/icon/Heart-icon.png">&nbsp;
                       </div>
                       <div class="inline text-left" v-if="ListOrg.rating%1!=0">

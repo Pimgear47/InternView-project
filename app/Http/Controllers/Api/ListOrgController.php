@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ListOrg;
+use App\Review;
 
 class ListOrgController extends Controller
 {
@@ -52,8 +53,11 @@ class ListOrgController extends Controller
      */
     public function show($id)
     {
-        $listorg=ListOrg::with('Review')->find($id);
-        return response()->json($listorg);
+        // $listorg=ListOrg::with('Review')->find($id);
+        // return response()->json($listorg);
+        $Reviews=Review::with('User')->where('org_id',$id)->get();
+        $listorg=ListOrg::find($id);
+        return response()->json(['ListOrg' => $listorg,'Review' => $Reviews]);
     }
 
     /**
