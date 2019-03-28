@@ -10,9 +10,9 @@ Vue.component('list-page-guest', require('./components/ListOrg/ListPageGuest.vue
 Vue.component('list-page-admin', require('./components/ListOrg/ListPageAdmin.vue').default);
 Vue.component('edit', require('./components/ListOrg/Edit.vue').default);
 Vue.component('create', require('./components/ListOrg/Create.vue').default);
-Vue.component('show-org', require('./components/ListOrg/ShowOrg.vue').default);
 
-Vue.component('show-review', require('./components/ListOrg/ShowReview.vue').default);
+Vue.component('show-org-user', require('./components/ListOrg/ShowOrgUser.vue').default);
+Vue.component('show-org-guest', require('./components/ListOrg/ShowOrgGuest.vue').default);
 
 const app = new Vue({
     el: '#app'

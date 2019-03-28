@@ -31,6 +31,7 @@
           </div>
         </div>
         <hr>
+        Guest mode
       </div>
     </div>
   </div>
@@ -38,7 +39,7 @@
 
 <script>
 export default {
-  props: ["id"],
+  props: ["id","user-id"],
   data() {
     return {
       reviews: [],

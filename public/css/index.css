@@ -118,12 +118,7 @@ body {
     width: 170px;
     height: 40px;
     padding: 5px 10px;
-    margin: auto;
-    border-radius: 30px;
-    background: #FFF;
-    display: block;
     overflow: hidden;
-    box-shadow: 0 1px #CCC, 0 5px #DDD, 0 9px 6px -3px #999;
     unicode-bidi: bidi-override;
     direction: rtl;
 }
