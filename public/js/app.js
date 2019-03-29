@@ -2334,6 +2334,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "usernow"],
   data: function data() {
@@ -2353,20 +2388,43 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.getData();
+  },
+  methods: {
+    addNewReview: function addNewReview() {
+      if (this.getReview.getDescription != "" && this.getReview.getRating != 0) {
+        axios.post("/api/reviews", {
+          org_id: this.getReview.getOrgId,
+          user_id: this.getReview.getUserId,
+          description: this.getReview.getDescription,
+          rating: this.getReview.getRating
+        });
+        this.getReview.getDescription = "";
+        this.getReview.getRating = 0;
+        alert("OK");
+      } else {
+        alert("Please Review and rate this");
+      }
+    },
+    getData: function getData() {
+      var _this = this;
 
-    axios.get("/api/listorgs/" + this.id).then(function (response) {
-      var ArrayData = response.data;
-      _this.orgData = ArrayData.ListOrg;
-      _this.reviews = ArrayData.Review.map(function (review) {
-        return {
-          description: review.description,
-          user: review.user,
-          rating: review.rating,
-          created_at: review.created_at
-        };
+      axios.get("/api/listorgs/" + this.id).then(function (response) {
+        var ArrayData = response.data;
+        _this.orgData = ArrayData.ListOrg;
+        _this.reviews = ArrayData.Review.map(function (review) {
+          return {
+            description: review.description,
+            user: review.user,
+            rating: review.rating,
+            created_at: review.created_at
+          };
+        });
       });
-    });
+    },
+    reloadPage: function reloadPage() {
+      window.location.reload();
+    }
   }
 });
 
@@ -37798,7 +37856,10 @@ var render = function() {
                               _vm._l(parseInt(ListOrg.rating), function(i) {
                                 return _c(
                                   "div",
-                                  { staticClass: "inline text-left" },
+                                  {
+                                    key: i.id,
+                                    staticClass: "inline text-left"
+                                  },
                                   [
                                     _c("img", {
                                       attrs: {
@@ -38443,9 +38504,7 @@ var render = function() {
           _c("hr"),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("h1", { staticClass: "txt-regular" }, [
-              _vm._v("รีวิวสถานที่ฝึกงานนี้")
-            ]),
+            _c("h1", { staticClass: "txt-regular" }, [_vm._v("Review Here")]),
             _vm._v(" "),
             _c(
               "textarea",
@@ -38629,7 +38688,20 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary float-right",
+                    on: {
+                      click: function($event) {
+                        _vm.addNewReview(), _vm.reloadPage()
+                      }
+                    }
+                  },
+                  [_vm._v("Submit")]
+                )
+              ])
             ])
           ])
         ])
@@ -38637,18 +38709,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("button", { staticClass: "btn btn-primary float-right" }, [
-        _vm._v("Submit")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

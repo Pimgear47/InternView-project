@@ -32,27 +32,62 @@
         </div>
         <hr>
         <div class="form-group">
-          <h1 class="txt-regular">รีวิวสถานที่ฝึกงานนี้</h1>
-          <textarea class="form-control mb-2" id="exampleFormControlTextarea1" rows="3" v-model="getReview.getDescription">></textarea>
+          <h1 class="txt-regular">Review Here</h1>
+          <textarea
+            class="form-control mb-2"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            v-model="getReview.getDescription"
+          >></textarea>
           <div class="row">
             <div class="col-md-6">
               <div id="ratings">
                 <div id="like" class="rating">
-                  <input type="radio" id="heart_5" name="like" value="5" v-model="getReview.getRating">
+                  <input
+                    type="radio"
+                    id="heart_5"
+                    name="like"
+                    value="5"
+                    v-model="getReview.getRating"
+                  >
                   <label for="heart_5" title="Five">&#10084;</label>
-                  <input type="radio" id="heart_4" name="like" value="4" v-model="getReview.getRating">
+                  <input
+                    type="radio"
+                    id="heart_4"
+                    name="like"
+                    value="4"
+                    v-model="getReview.getRating"
+                  >
                   <label for="heart_4" title="Four">&#10084;</label>
-                  <input type="radio" id="heart_3" name="like" value="3" v-model="getReview.getRating">
+                  <input
+                    type="radio"
+                    id="heart_3"
+                    name="like"
+                    value="3"
+                    v-model="getReview.getRating"
+                  >
                   <label for="heart_3" title="Three">&#10084;</label>
-                  <input type="radio" id="heart_2" name="like" value="2" v-model="getReview.getRating">
+                  <input
+                    type="radio"
+                    id="heart_2"
+                    name="like"
+                    value="2"
+                    v-model="getReview.getRating"
+                  >
                   <label for="heart_2" title="Two">&#10084;</label>
-                  <input type="radio" id="heart_1" name="like" value="1" v-model="getReview.getRating">
+                  <input
+                    type="radio"
+                    id="heart_1"
+                    name="like"
+                    value="1"
+                    v-model="getReview.getRating"
+                  >
                   <label for="heart_1" title="One">&#10084;</label>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <button class="btn btn-primary float-right">Submit</button>
+              <button class="btn btn-primary float-right" v-on:click="addNewReview(),reloadPage()">Submit</button>
             </div>
           </div>
         </div>
@@ -63,7 +98,7 @@
 
 <script>
 export default {
-  props: ["id","usernow"],
+  props: ["id", "usernow"],
   data() {
     return {
       reviews: [],
@@ -73,26 +108,52 @@ export default {
         description: ""
       },
       getReview: {
-        getOrgId : this.id,
-        getUserId : this.usernow.id,
-        getRating : "",
+        getOrgId: this.id,
+        getUserId: this.usernow.id,
+        getRating: "",
         getDescription: ""
-      },
+      }
     };
   },
   mounted() {
-    axios.get("/api/listorgs/" + this.id).then(response => {
-      var ArrayData = response.data;
-      this.orgData = ArrayData.ListOrg;
-      this.reviews = ArrayData.Review.map(review => {
-        return {
-          description: review.description,
-          user: review.user,
-          rating: review.rating,
-          created_at: review.created_at
-        };
+    this.getData();
+  },
+  methods: {
+    addNewReview() {
+      if (
+        this.getReview.getDescription != "" &&
+        this.getReview.getRating != 0
+      ) {
+        axios.post("/api/reviews", {
+          org_id: this.getReview.getOrgId,
+          user_id: this.getReview.getUserId,
+          description: this.getReview.getDescription,
+          rating: this.getReview.getRating
+        });
+        this.getReview.getDescription = "";
+        this.getReview.getRating = 0;
+        alert("OK");
+      } else {
+        alert("Please Review and rate this");
+      }
+    },
+    getData() {
+      axios.get("/api/listorgs/" + this.id).then(response => {
+        var ArrayData = response.data;
+        this.orgData = ArrayData.ListOrg;
+        this.reviews = ArrayData.Review.map(review => {
+          return {
+            description: review.description,
+            user: review.user,
+            rating: review.rating,
+            created_at: review.created_at
+          };
+        });
       });
-    });
+    },
+    reloadPage() {
+      window.location.reload();
+    }
   }
 };
 </script>
