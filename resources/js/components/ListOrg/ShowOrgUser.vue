@@ -9,7 +9,7 @@
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <hr>
-        <div id="columns-holder">
+        <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews" :key="review.review_id">
             <div class="row p-2">
               <div class="col-md-2"></div>
@@ -30,9 +30,12 @@
             </div>
           </div>
         </div>
+        <div
+          v-if="reviews.length == 0"
+        ><h1 class="txt-regular text-center">There aren’t any reviews for this organization yet</h1></div>
         <hr>
         <div class="form-group">
-          <h1 class="txt-regular">Review Here</h1>
+          <h1 class="txt-regular">รีวิวให้กับสถานที่ฝึกงานนี้</h1>
           <textarea
             class="form-control mb-2"
             id="exampleFormControlTextarea1"
@@ -120,7 +123,9 @@ export default {
   },
   methods: {
     addNewReview() {
-      var date = new Date().toLocaleString('en-US',{hour12:false}).split(" ");
+      var date = new Date()
+        .toLocaleString("en-US", { hour12: false })
+        .split(" ");
       var time = date[1];
       var mdy = date[0];
       mdy = mdy.split("/");

@@ -9,7 +9,7 @@
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <hr>
-        <div id="columns-holder">
+        <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews" :key="review.review_id">
             <div class="row p-2">
               <div class="col-md-2"></div>
@@ -30,8 +30,23 @@
             </div>
           </div>
         </div>
+        <div v-if="reviews.length == 0">
+          <h1 class="txt-regular text-center">There aren’t any reviews for this organization yet</h1>
+        </div>
         <hr>
-        Guest mode
+        <div>
+          <center>
+            <span>
+              If you have any review to share, please login first
+              <a
+                href="/login"
+                class="btn btn-outline-primary mr-2 ml-2"
+              >Login</a>
+              or
+              <a href="/register" class="btn btn-outline-primary mr-2 ml-2">Sign up</a>
+            </span>
+          </center>
+        </div>
       </div>
     </div>
   </div>
@@ -39,7 +54,7 @@
 
 <script>
 export default {
-  props: ["id","user-id"],
+  props: ["id"],
   data() {
     return {
       reviews: [],
@@ -53,9 +68,7 @@ export default {
   mounted() {
     axios.get("/api/listorgs/" + this.id).then(response => {
       var ArrayData = response.data;
-
       this.orgData = ArrayData.ListOrg;
-
       this.reviews = ArrayData.Review.map(review => {
         return {
           description: review.description,

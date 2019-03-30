@@ -2230,8 +2230,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id", "user-id"],
+  props: ["id"],
   data: function data() {
     return {
       reviews: [],
@@ -2369,6 +2384,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "usernow"],
   data: function data() {
@@ -2392,7 +2410,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addNewReview: function addNewReview() {
-      var date = new Date().toLocaleString('en-US', {
+      var date = new Date().toLocaleString("en-US", {
         hour12: false
       }).split(" ");
       var time = date[1];
@@ -38370,54 +38388,98 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c(
-            "div",
-            { attrs: { id: "columns-holder" } },
-            _vm._l(_vm.reviews, function(review) {
-              return _c("div", { key: review.review_id, staticClass: "box" }, [
-                _c("div", { staticClass: "row p-2" }, [
-                  _c("div", { staticClass: "col-md-2" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-10" }, [
-                    _c("h2", { staticClass: "txt-regular" }, [
-                      _c("b", [
-                        _vm._v(
-                          _vm._s(review.user.firstname) +
-                            " " +
-                            _vm._s(review.user.lastname)
-                        )
+          _vm.reviews.length != 0
+            ? _c(
+                "div",
+                { attrs: { id: "columns-holder" } },
+                _vm._l(_vm.reviews, function(review) {
+                  return _c(
+                    "div",
+                    { key: review.review_id, staticClass: "box" },
+                    [
+                      _c("div", { staticClass: "row p-2" }, [
+                        _c("div", { staticClass: "col-md-2" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-10" }, [
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _c("b", [
+                              _vm._v(
+                                _vm._s(review.user.firstname) +
+                                  " " +
+                                  _vm._s(review.user.lastname)
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _vm._v("# " + _vm._s(review.created_at))
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _vm._v(_vm._s(review.description))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row ml-1" },
+                            _vm._l(parseInt(review.rating), function(i) {
+                              return _c(
+                                "div",
+                                { key: i.id, staticClass: "like-icon" },
+                                [_vm._v("❤  ")]
+                              )
+                            }),
+                            0
+                          )
+                        ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("h2", { staticClass: "txt-regular" }, [
-                      _vm._v("# " + _vm._s(review.created_at))
-                    ]),
-                    _vm._v(" "),
-                    _c("h2", { staticClass: "txt-regular" }, [
-                      _vm._v(_vm._s(review.description))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "row ml-1" },
-                      _vm._l(parseInt(review.rating), function(i) {
-                        return _c(
-                          "div",
-                          { key: i.id, staticClass: "like-icon" },
-                          [_vm._v("❤  ")]
-                        )
-                      }),
-                      0
-                    )
-                  ])
+                    ]
+                  )
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.reviews.length == 0
+            ? _c("div", [
+                _c("h1", { staticClass: "txt-regular text-center" }, [
+                  _vm._v("There aren’t any reviews for this organization yet")
                 ])
               ])
-            }),
-            0
-          ),
+            : _vm._e(),
           _vm._v(" "),
           _c("hr"),
-          _vm._v("\n      Guest mode\n    ")
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("center", [
+                _c("span", [
+                  _vm._v(
+                    "\n            If you have any review to share, please login first\n            "
+                  ),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-primary mr-2 ml-2",
+                      attrs: { href: "/login" }
+                    },
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v("\n            or\n            "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-primary mr-2 ml-2",
+                      attrs: { href: "/register" }
+                    },
+                    [_vm._v("Sign up")]
+                  )
+                ])
+              ])
+            ],
+            1
+          )
         ])
       ])
     ]
@@ -38470,56 +38532,72 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c(
-            "div",
-            { attrs: { id: "columns-holder" } },
-            _vm._l(_vm.reviews, function(review) {
-              return _c("div", { key: review.review_id, staticClass: "box" }, [
-                _c("div", { staticClass: "row p-2" }, [
-                  _c("div", { staticClass: "col-md-2" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-10" }, [
-                    _c("h2", { staticClass: "txt-regular" }, [
-                      _c("b", [
-                        _vm._v(
-                          _vm._s(review.user.firstname) +
-                            " " +
-                            _vm._s(review.user.lastname)
-                        )
+          _vm.reviews.length != 0
+            ? _c(
+                "div",
+                { attrs: { id: "columns-holder" } },
+                _vm._l(_vm.reviews, function(review) {
+                  return _c(
+                    "div",
+                    { key: review.review_id, staticClass: "box" },
+                    [
+                      _c("div", { staticClass: "row p-2" }, [
+                        _c("div", { staticClass: "col-md-2" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-10" }, [
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _c("b", [
+                              _vm._v(
+                                _vm._s(review.user.firstname) +
+                                  " " +
+                                  _vm._s(review.user.lastname)
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _vm._v("# " + _vm._s(review.created_at))
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _vm._v(_vm._s(review.description))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row ml-1" },
+                            _vm._l(parseInt(review.rating), function(i) {
+                              return _c(
+                                "div",
+                                { key: i.id, staticClass: "like-icon" },
+                                [_vm._v("❤  ")]
+                              )
+                            }),
+                            0
+                          )
+                        ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("h2", { staticClass: "txt-regular" }, [
-                      _vm._v("# " + _vm._s(review.created_at))
-                    ]),
-                    _vm._v(" "),
-                    _c("h2", { staticClass: "txt-regular" }, [
-                      _vm._v(_vm._s(review.description))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "row ml-1" },
-                      _vm._l(parseInt(review.rating), function(i) {
-                        return _c(
-                          "div",
-                          { key: i.id, staticClass: "like-icon" },
-                          [_vm._v("❤  ")]
-                        )
-                      }),
-                      0
-                    )
-                  ])
+                    ]
+                  )
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.reviews.length == 0
+            ? _c("div", [
+                _c("h1", { staticClass: "txt-regular text-center" }, [
+                  _vm._v("There aren’t any reviews for this organization yet")
                 ])
               ])
-            }),
-            0
-          ),
+            : _vm._e(),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("h1", { staticClass: "txt-regular" }, [_vm._v("Review Here")]),
+            _c("h1", { staticClass: "txt-regular" }, [
+              _vm._v("รีวิวให้กับสถานที่ฝึกงานนี้")
+            ]),
             _vm._v(" "),
             _c(
               "textarea",
