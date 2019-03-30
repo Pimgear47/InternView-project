@@ -2392,6 +2392,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addNewReview: function addNewReview() {
+      var date = new Date().toLocaleString('en-US', {
+        hour12: false
+      }).split(" ");
+      var time = date[1];
+      var mdy = date[0];
+      mdy = mdy.split("/");
+      var month = parseInt(mdy[0]);
+      var day = parseInt(mdy[1]);
+      var year = parseInt(mdy[2]);
+      var formattedDate = year + "-" + month + "-" + day + " " + time;
+
       if (this.getReview.getDescription != "" && this.getReview.getRating != 0) {
         axios.post("/api/reviews", {
           org_id: this.getReview.getOrgId,
@@ -2399,6 +2410,13 @@ __webpack_require__.r(__webpack_exports__);
           description: this.getReview.getDescription,
           rating: this.getReview.getRating
         });
+        var newReview = {
+          description: this.getReview.getDescription,
+          user: this.usernow,
+          rating: this.getReview.getRating,
+          created_at: formattedDate
+        };
+        this.reviews.push(newReview);
         this.getReview.getDescription = "";
         this.getReview.getRating = 0;
         alert("OK");
@@ -2421,9 +2439,6 @@ __webpack_require__.r(__webpack_exports__);
           };
         });
       });
-    },
-    reloadPage: function reloadPage() {
-      window.location.reload();
     }
   }
 });
@@ -38695,7 +38710,7 @@ var render = function() {
                     staticClass: "btn btn-primary float-right",
                     on: {
                       click: function($event) {
-                        _vm.addNewReview(), _vm.reloadPage()
+                        return _vm.addNewReview()
                       }
                     }
                   },

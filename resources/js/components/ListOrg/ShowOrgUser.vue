@@ -87,7 +87,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <button class="btn btn-primary float-right" v-on:click="addNewReview(),reloadPage()">Submit</button>
+              <button class="btn btn-primary float-right" v-on:click="addNewReview()">Submit</button>
             </div>
           </div>
         </div>
@@ -120,6 +120,14 @@ export default {
   },
   methods: {
     addNewReview() {
+      var date = new Date().toLocaleString('en-US',{hour12:false}).split(" ");
+      var time = date[1];
+      var mdy = date[0];
+      mdy = mdy.split("/");
+      var month = parseInt(mdy[0]);
+      var day = parseInt(mdy[1]);
+      var year = parseInt(mdy[2]);
+      var formattedDate = year + "-" + month + "-" + day + " " + time;
       if (
         this.getReview.getDescription != "" &&
         this.getReview.getRating != 0
@@ -130,6 +138,13 @@ export default {
           description: this.getReview.getDescription,
           rating: this.getReview.getRating
         });
+        const newReview = {
+          description: this.getReview.getDescription,
+          user: this.usernow,
+          rating: this.getReview.getRating,
+          created_at: formattedDate
+        };
+        this.reviews.push(newReview);
         this.getReview.getDescription = "";
         this.getReview.getRating = 0;
         alert("OK");
@@ -150,9 +165,6 @@ export default {
           };
         });
       });
-    },
-    reloadPage() {
-      window.location.reload();
     }
   }
 };
