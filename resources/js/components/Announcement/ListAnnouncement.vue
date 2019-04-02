@@ -74,7 +74,7 @@ export default {
   computed: {
     filteredAnns: function() {
       return this.ListAnns.filter(ListAnn => {
-        return ListAnn.title.match(this.search);
+        return (ListAnn.title).toLowerCase().match((this.search).toLowerCase());
       });
     }
   }

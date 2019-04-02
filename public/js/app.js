@@ -1842,7 +1842,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.ListAnns.filter(function (ListAnn) {
-        return ListAnn.title.match(_this2.search);
+        return ListAnn.title.toLowerCase().match(_this2.search.toLowerCase());
       });
     }
   }
