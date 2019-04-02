@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Announcement extends Model
 {
     protected $fillable = [
-        'ann_id', 'name_org', 'announcer', 'detail','contact_person','tel_number','email'
+        'ann_id','title', 'name_org' , 'announcer', 'detail','address','contact_person','tel_number','email'
     ];
 
     public function Position(){

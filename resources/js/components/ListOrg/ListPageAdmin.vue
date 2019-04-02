@@ -44,15 +44,12 @@
                       role="button"
                     >Edit</a>
                     <div class="row p-3">
-                      <div>
-                      </div>
-                      <div class="inline text-left" v-for="i in parseInt(ListOrg.rating)" :key="i.id">
-                        <img src="images/icon/Heart-icon.png">&nbsp;
-                      </div>
-                      <div class="inline text-left" v-if="ListOrg.rating%1!=0">
-                        <img src="images/icon/Heart-icon-half.png">
-                      </div>
-                      &nbsp;<h2 class="txt-bold">Rating: {{(Math.round(ListOrg.rating*2))/2}}/5</h2>
+                      <div
+                        class="inline text-left"
+                        v-for="i in parseInt(Math.round(ListOrg.rating))"
+                        :key="i.id"
+                      ><div class="like-icon">&#10084; &nbsp;</div></div>&nbsp;
+                      <span>Rating: {{Math.round(ListOrg.rating)}}/5</span>
                     </div>
                   </div>
                 </div>

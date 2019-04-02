@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('listorgs','Api\ListOrgController');
 Route::resource('reviews','Api\ReviewController');
+Route::resource('listannouncement','Api\AnnouncementController');

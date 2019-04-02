@@ -14,9 +14,9 @@
             <div class="row p-2">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <h2 class="txt-regular">
+                <h1 class="txt-regular">
                   <b>{{review.user.firstname}} {{review.user.lastname}}</b>
-                </h2>
+                </h1>
                 <h2 class="txt-regular"># {{review.created_at}}</h2>
                 <h2 class="txt-regular">{{review.description}}</h2>
                 <div class="row ml-1">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div v-if="reviews.length == 0">
-          <h1 class="txt-regular text-center">There aren’t any reviews for this organization yet</h1>
+          <h1 class="txt-regular text-center">There aren’t any reviews for this organization yet.</h1>
         </div>
         <hr>
         <div>

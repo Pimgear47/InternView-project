@@ -17,6 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -45,8 +46,9 @@
                         <?php if($page == 'listorgs'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
                         <a class="nav-link" href="/listorgs">List</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Annoucement</a>
+                    <li
+                        <?php if($page == 'listannouncement'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
+                        <a class="nav-link" href="/listannouncement">Annoucement</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
