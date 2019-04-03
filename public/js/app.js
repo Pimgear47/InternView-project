@@ -2231,6 +2231,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -2242,17 +2245,25 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("api/listorgs").then(function (response) {
         _this.ListOrgs = response.data;
       });
+    },
+    CalRating: function CalRating(ListOrg) {
+      var rating = 0;
+      var avg = 0;
+
+      if (ListOrg.review.length != 0) {
+        for (var i = 0; i < ListOrg.review.length; i++) {
+          rating += parseInt(ListOrg.review[i].rating);
+        }
+
+        avg = rating / ListOrg.review.length;
+      } else avg = 0;
+
+      return avg;
     }
   },
   data: function data() {
     return {
       ListOrgs: [],
-      ListOrg: {
-        id: 0,
-        picture: "",
-        name_org: "",
-        rating: 0
-      },
       search: "",
       type: "",
       rating_s: "0"
@@ -2263,7 +2274,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.ListOrgs.filter(function (ListOrg) {
-        return ListOrg.name_org.match(_this2.search) && Math.round(ListOrg.rating * 2) / 2 >= parseInt(_this2.rating_s) && ListOrg.type.match(_this2.type);
+        return ListOrg.name_org.match(_this2.search) && _this2.CalRating(ListOrg) >= parseInt(_this2.rating_s) && ListOrg.type.match(_this2.type);
       });
     }
   }
@@ -38356,31 +38367,30 @@ var render = function() {
                             "div",
                             { staticClass: "row p-3" },
                             [
-                              _vm._l(
-                                parseInt(Math.round(ListOrg.rating)),
-                                function(i) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: i.id,
-                                      staticClass: "inline text-left"
-                                    },
-                                    [
-                                      _c("div", { staticClass: "like-icon" }, [
-                                        _vm._v("❤  ")
-                                      ])
-                                    ]
-                                  )
-                                }
-                              ),
+                              _vm._l(_vm.CalRating(ListOrg), function(i) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: i.id,
+                                    staticClass: "inline text-left"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "like-icon" }, [
+                                      _vm._v("❤  ")
+                                    ])
+                                  ]
+                                )
+                              }),
                               _vm._v(" \n                    "),
                               _c("span", [
                                 _vm._v(
                                   "Rating: " +
-                                    _vm._s(Math.round(ListOrg.rating)) +
+                                    _vm._s(_vm.CalRating(ListOrg)) +
                                     "/5"
                                 )
-                              ])
+                              ]),
+                              _vm._v(" \n                    "),
+                              _c("span")
                             ],
                             2
                           )

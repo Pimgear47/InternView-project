@@ -16,7 +16,7 @@ class ListOrgController extends Controller
      */
     public function index()
     {
-        $listorgs=ListOrg::all();
+        $listorgs=ListOrg::with('Review')->get();
         return response()->json($listorgs);
     }
 

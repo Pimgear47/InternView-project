@@ -35,10 +35,13 @@
                     <div class="row p-3">
                       <div
                         class="inline text-left"
-                        v-for="i in parseInt(Math.round(ListOrg.rating))"
+                        v-for="i in CalRating(ListOrg)"
                         :key="i.id"
-                      ><div class="like-icon">&#10084; &nbsp;</div></div>&nbsp;
-                      <span>Rating: {{Math.round(ListOrg.rating)}}/5</span>
+                      >
+                        <div class="like-icon">&#10084; &nbsp;</div>
+                      </div>&nbsp;
+                      <span>Rating: {{CalRating(ListOrg)}}/5</span>&nbsp;
+                      <span></span>
                     </div>
                   </div>
                 </div>
@@ -86,17 +89,22 @@ export default {
       axios.get("api/listorgs").then(response => {
         this.ListOrgs = response.data;
       });
+    },
+    CalRating(ListOrg) {
+      var rating = 0;
+      var avg = 0;
+      if (ListOrg.review.length != 0) {
+        for (var i = 0; i < ListOrg.review.length; i++) {
+          rating += parseInt(ListOrg.review[i].rating);
+        }
+        avg = rating / ListOrg.review.length;
+      } else avg = 0;
+      return avg;
     }
   },
   data() {
     return {
       ListOrgs: [],
-      ListOrg: {
-        id: 0,
-        picture: "",
-        name_org: "",
-        rating: 0
-      },
       search: "",
       type: "",
       rating_s: "0"
@@ -107,8 +115,8 @@ export default {
       return this.ListOrgs.filter(ListOrg => {
         return (
           ListOrg.name_org.match(this.search) &&
-          Math.round(ListOrg.rating * 2) / 2 >= parseInt(this.rating_s) &&
-          ListOrg.type.match(this.type)
+          this.CalRating(ListOrg) >= parseInt(this.rating_s) &&
+          ListOrg.type.match(this.type) 
         );
       });
     }
