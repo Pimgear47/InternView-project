@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div id="app">
-    <edit-list id="{!!$id!!}"></edit-list>
+    <show-ann id="{!!$id!!}"></show-ann>
 </div>
 @endsection

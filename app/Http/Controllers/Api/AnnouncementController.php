@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcement=Announcement::all();
+        $announcement = Announcement::orderBy('created_at','desc')->get();
         return response()->json($announcement);
     }
 
@@ -26,7 +26,7 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +37,17 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $announcement = new Announcement();
+        $announcement->title = $request->get('title');
+        $announcement->name_org = $request->get('name_org');
+        $announcement->announcer = $request->get('announcer');
+        $announcement->detail = $request->get('detail');
+        $announcement->contact_person = $request->get('contact_person');
+        $announcement->tel_number = $request->get('tel_number');
+        $announcement->address = $request->get('address');
+        $announcement->email = $request->get('email');
+        $announcement->save();
+        return response()->json($announcement);
     }
 
     /**
@@ -48,7 +58,8 @@ class AnnouncementController extends Controller
      */
     public function show($id)
     {
-        //
+        $announcement = Announcement::find($id);
+        return response()->json($announcement);
     }
 
     /**

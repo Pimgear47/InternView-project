@@ -24,7 +24,7 @@ class ListOrgController extends Controller
      */
     public function create()
     {
-        return view('Page/List/create');
+        return view('Page/List/createOrg');
     }
 
     /**

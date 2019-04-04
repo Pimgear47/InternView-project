@@ -1,7 +1,7 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
-    <div class="card border-0 shadow">
-      <div class="container mt-3">
+    <div class="card col-md-11 border-0 shadow">
+      <div class="container mt-5 mb-3">
         <h2 class="text-center title">เพิ่มข้อมูล</h2>
         <form action="/listorgs">
           <div class="form-group">

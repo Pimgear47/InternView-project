@@ -17,6 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.js"></script>
 
 </head>
 
@@ -48,7 +49,7 @@
                     </li>
                     <li
                         <?php if($page == 'listannouncement'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
-                        <a class="nav-link" href="/listannouncement">Annoucement</a>
+                        <a class="nav-link" href="/listannouncement">Announcement</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>

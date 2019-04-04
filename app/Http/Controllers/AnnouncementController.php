@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Announcement;
 
 class AnnouncementController extends Controller
 {
@@ -23,7 +24,7 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        //
+        return view('Page/Announcement/createAnn');
     }
 
     /**
@@ -45,7 +46,8 @@ class AnnouncementController extends Controller
      */
     public function show($id)
     {
-        //
+        $announcement=Announcement::find($id);
+        return view('Page/Announcement/show',compact('id'));
     }
 
     /**

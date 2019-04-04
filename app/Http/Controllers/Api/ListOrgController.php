@@ -53,8 +53,6 @@ class ListOrgController extends Controller
      */
     public function show($id)
     {
-        // $listorg=ListOrg::with('Review')->find($id);
-        // return response()->json($listorg);
         $Reviews=Review::with('User')->where('org_id',$id)->get();
         $listorg=ListOrg::find($id);
         return response()->json(['ListOrg' => $listorg,'Review' => $Reviews]);

@@ -20,16 +20,27 @@
               <div
                 class="card-wo-r shadow col-lg-12 p-2 mb-2"
                 v-for="(ListAnn) in filteredAnns"
-                :key="ListAnn.ann_id"
+                :key="ListAnn.id"
               >
                 <div class="row pl-4 pt-2 pb-2">
-                  <a href="#" class="txt-bold text-link">{{ListAnn.title}}</a>
+                  <a
+                    :href="'/listannouncement/'+ListAnn.id"
+                    class="txt-bold text-link"
+                  >{{ListAnn.title}}</a>
+                </div>
+                <div class="row pl-4 pt-2 pb-2">
+                  <span>
+                    ลงประกาศเมื่อ
+                    <b>{{ListAnn.created_at}}</b>
+                  </span>
                 </div>
                 <div class="row pl-4 pb-2 pr-4">
-                  <div class="like-icon">&#9873;</div> <span>&nbsp;{{ListAnn.name_org}}</span>
+                  <div class="like-icon">&#9873;</div>
+                  <span>&nbsp;{{ListAnn.name_org}}</span>
                 </div>
                 <div class="row pl-4 pb-2 pr-4">
-                  <div class="like-icon">&#9660;</div> <span>&nbsp;{{ListAnn.address}}</span>
+                  <div class="like-icon">&#9660;</div>
+                  <span>&nbsp;{{ListAnn.address}}</span>
                 </div>
               </div>
             </div>
@@ -62,7 +73,7 @@ export default {
     return {
       ListAnns: [],
       ListAnn: {
-        ann_id: 0,
+        id: 0,
         title: "",
         name_org: "",
         address: "",
@@ -74,7 +85,7 @@ export default {
   computed: {
     filteredAnns: function() {
       return this.ListAnns.filter(ListAnn => {
-        return (ListAnn.title).toLowerCase().match((this.search).toLowerCase());
+        return ListAnn.title.toLowerCase().match(this.search.toLowerCase());
       });
     }
   }
