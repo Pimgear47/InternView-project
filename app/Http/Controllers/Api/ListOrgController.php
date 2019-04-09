@@ -39,8 +39,9 @@ class ListOrgController extends Controller
     public function store(Request $request)
     {
         $listorg=new ListOrg();
-        $listorg->id=$request->get('id');
         $listorg->name_org=$request->get('name_org');
+        $listorg->description=$request->get('description');
+        $listorg->address=$request->get('address');
         $listorg->save();
         return response()->json($listorg);
     }

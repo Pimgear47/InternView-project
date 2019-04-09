@@ -8,6 +8,7 @@
       <div class="container mt-4 mb-3">
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
+        <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews" :key="review.review_id">
@@ -44,7 +45,7 @@
             id="exampleFormControlTextarea1"
             rows="3"
             v-model="getReview.getDescription"
-          >></textarea>
+          ></textarea>
           <div class="row">
             <div class="col-md-6">
               <div id="ratings">

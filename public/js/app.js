@@ -2151,18 +2151,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      id: '',
-      name_org: ""
+      name_org: "",
+      description: "",
+      address: ""
     };
   },
   methods: {
     addNewOrg: function addNewOrg() {
       axios.post("/api/listorgs", {
-        id: this.id,
-        name_org: this.name_org
+        name_org: this.name_org,
+        description: this.description,
+        address: this.address
       });
     }
   }
@@ -2321,6 +2332,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -2357,6 +2373,11 @@ __webpack_require__.r(__webpack_exports__);
       } else avg = 0;
 
       return avg;
+    },
+    ArrTag: function ArrTag(ListOrg) {
+      var tagType = [];
+      tagType = ListOrg.type.split(",");
+      return tagType.splice(1);
     }
   },
   data: function data() {
@@ -2364,7 +2385,8 @@ __webpack_require__.r(__webpack_exports__);
       ListOrgs: [],
       search: "",
       type: "",
-      rating_s: "0"
+      rating_s: "0",
+      tagType: []
     };
   },
   computed: {
@@ -2464,6 +2486,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -2489,6 +2512,11 @@ __webpack_require__.r(__webpack_exports__);
       } else avg = 0;
 
       return avg;
+    },
+    ArrTag: function ArrTag(ListOrg) {
+      var tagType = [];
+      tagType = ListOrg.type.split(",");
+      return tagType.splice(1);
     }
   },
   data: function data() {
@@ -2496,7 +2524,8 @@ __webpack_require__.r(__webpack_exports__);
       ListOrgs: [],
       search: "",
       type: "",
-      rating_s: "0"
+      rating_s: "0",
+      tagType: []
     };
   },
   computed: {
@@ -2617,6 +2646,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -38313,7 +38343,7 @@ var render = function() {
     { staticClass: "container col-md-10 col-sm-9 col-lg-10 mb-5" },
     [
       _c("div", { staticClass: "card border-0 shadow" }, [
-        _c("div", { staticClass: "container mt-4 mb-3" }, [
+        _c("div", { staticClass: "container mt-5 mb-3" }, [
           _c("h3", [_vm._v(_vm._s(this.title))]),
           _vm._v(" "),
           _c("div", { staticClass: "row pl-4 pt-2 pb-2" }, [
@@ -38467,39 +38497,13 @@ var render = function() {
     "div",
     { staticClass: "container col-md-10 col-sm-9 col-lg-10 mb-5" },
     [
-      _c("div", { staticClass: "card col-md-11 border-0 shadow" }, [
+      _c("div", { staticClass: "card border-0 shadow pl-5 pr-5 pb-3" }, [
         _c("div", { staticClass: "container mt-5 mb-3" }, [
           _c("h2", { staticClass: "text-center title" }, [
             _vm._v("เพิ่มข้อมูล")
           ]),
           _vm._v(" "),
           _c("form", { attrs: { action: "/listorgs" } }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("id:")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.id,
-                    expression: "id"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.id = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("name_org:")]),
               _vm._v(" "),
@@ -38521,6 +38525,58 @@ var render = function() {
                       return
                     }
                     _vm.name_org = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("description:")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.description,
+                    expression: "description"
+                  }
+                ],
+                staticClass: "form-control mb-2",
+                attrs: { id: "exampleFormControlTextarea1", rows: "5" },
+                domProps: { value: _vm.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.description = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("address:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.address,
+                    expression: "address"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.address = $event.target.value
                   }
                 }
               })
@@ -38748,7 +38804,23 @@ var render = function() {
                                     "/5"
                                 )
                               ]),
-                              _vm._v(" \n                  ")
+                              _vm._v(" \n                    "),
+                              _c(
+                                "ul",
+                                { staticClass: "tags" },
+                                _vm._l(_vm.ArrTag(ListOrg), function(tag) {
+                                  return _c("li", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "javascript:void(0);" }
+                                      },
+                                      [_vm._v(_vm._s(tag))]
+                                    )
+                                  ])
+                                }),
+                                0
+                              )
                             ],
                             2
                           )
@@ -38994,7 +39066,23 @@ var render = function() {
                                     "/5"
                                 )
                               ]),
-                              _vm._v(" \n                  ")
+                              _vm._v(" \n                    "),
+                              _c(
+                                "ul",
+                                { staticClass: "tags" },
+                                _vm._l(_vm.ArrTag(ListOrg), function(tag) {
+                                  return _c("li", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "javascript:void(0);" }
+                                      },
+                                      [_vm._v(_vm._s(tag))]
+                                    )
+                                  ])
+                                }),
+                                0
+                              )
                             ],
                             2
                           )
@@ -39179,10 +39267,9 @@ var render = function() {
               _vm._v(_vm._s(_vm.orgData.description))
             ]),
             _vm._v(" "),
-            _c("div", {
-              staticStyle: { height: "50%", width: "50%" },
-              attrs: { id: "map-canvas" }
-            }),
+            _c("h2", { staticClass: "txt-regular" }, [
+              _vm._v("ที่อยู่ : " + _vm._s(_vm.orgData.address))
+            ]),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -39329,6 +39416,10 @@ var render = function() {
             _vm._v(_vm._s(_vm.orgData.description))
           ]),
           _vm._v(" "),
+          _c("h2", { staticClass: "txt-regular" }, [
+            _vm._v("ที่อยู่ : " + _vm._s(_vm.orgData.address))
+          ]),
+          _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _vm.reviews.length != 0
@@ -39408,35 +39499,31 @@ var render = function() {
                   _vm._v("รีวิวให้กับสถานที่ฝึกงานนี้")
                 ]),
                 _vm._v(" "),
-                _c(
-                  "textarea",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.getReview.getDescription,
-                        expression: "getReview.getDescription"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: { id: "exampleFormControlTextarea1", rows: "3" },
-                    domProps: { value: _vm.getReview.getDescription },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.getReview,
-                          "getDescription",
-                          $event.target.value
-                        )
-                      }
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.getReview.getDescription,
+                      expression: "getReview.getDescription"
                     }
-                  },
-                  [_vm._v(">")]
-                ),
+                  ],
+                  staticClass: "form-control mb-2",
+                  attrs: { id: "exampleFormControlTextarea1", rows: "3" },
+                  domProps: { value: _vm.getReview.getDescription },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.getReview,
+                        "getDescription",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-6" }, [

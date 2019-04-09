@@ -1,7 +1,7 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
-      <div class="container mt-4 mb-3">
+      <div class="container mt-5 mb-3">
         <h3>{{this.title}}</h3>
         <div class="row pl-4 pt-2 pb-2">
           <span class="text txt-regular">

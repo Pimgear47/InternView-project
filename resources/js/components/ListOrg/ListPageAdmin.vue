@@ -48,6 +48,11 @@
                         <div class="like-icon">&#10084; &nbsp;</div>
                       </div>&nbsp;
                       <span>Rating: {{CalRating(ListOrg)}}/5</span>&nbsp;
+                      <ul class="tags">
+                        <li v-for="tag in ArrTag(ListOrg)">
+                          <a href="javascript:void(0);">{{tag}}</a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -118,6 +123,11 @@ export default {
         avg = rating / ListOrg.review.length;
       } else avg = 0;
       return avg;
+    },
+    ArrTag(ListOrg) {
+      var tagType = [];
+      tagType = ListOrg.type.split(",");
+      return tagType.splice(1);
     }
   },
   data() {
@@ -125,7 +135,8 @@ export default {
       ListOrgs: [],
       search: "",
       type: "",
-      rating_s: "0"
+      rating_s: "0",
+      tagType: []
     };
   },
   computed: {
