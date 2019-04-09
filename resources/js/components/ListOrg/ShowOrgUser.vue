@@ -176,7 +176,7 @@ export default {
       });
     },
     checkPost(Arr) {
-      return Arr.user.id != this.usernow.id;
+      return Arr.user.id == this.usernow.id;
     }
   }
 };

@@ -2823,7 +2823,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     checkPost: function checkPost(Arr) {
-      return Arr.user.id != this.usernow.id;
+      return Arr.user.id == this.usernow.id;
     }
   }
 });
