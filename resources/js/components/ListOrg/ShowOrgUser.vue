@@ -11,9 +11,9 @@
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews" :key="review.review_id">
-            <div class="row p-2">
-              <div class="col-md-2"></div>
-              <div class="col-md-10">
+            <div class="row p-3">
+              <!-- <div class="col-md-2"></div> -->
+              <div class="col-md-12">
                 <h2 class="txt-regular">
                   <b>{{review.user.firstname}} {{review.user.lastname}}</b>
                 </h2>
@@ -30,11 +30,14 @@
             </div>
           </div>
         </div>
-        <div
-          v-if="reviews.length == 0"
-        ><h1 class="txt-regular text-center">There aren’t any reviews for this organization yet</h1></div>
+        <div v-if="reviews.length == 0">
+          <h1 class="txt-regular text-center">There aren’t any reviews for this organization yet.</h1>
+        </div>
         <hr>
-        <div class="form-group">
+        <div class="form-group" v-if="this.reviews.some(checkPost)">
+          <span><center>You have already reviewed this organization.</center></span>
+        </div>
+        <div class="form-group" v-else>
           <h1 class="txt-regular">รีวิวให้กับสถานที่ฝึกงานนี้</h1>
           <textarea
             class="form-control mb-2"
@@ -170,6 +173,9 @@ export default {
           };
         });
       });
+    },
+    checkPost(Arr) {
+      return Arr.user.id != this.usernow.id;
     }
   }
 };

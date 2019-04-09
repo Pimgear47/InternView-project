@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="height:100%;">
 
 <head>
     <meta charset="utf-8">
@@ -17,7 +17,21 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.js"></script>
+    <!-- Map -->
+    <!-- <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgu0Vw6ZOppFPo5K27dieYEJf62eMBTJA">
+    </script>
+
+    <script>
+    function initialize() {
+        var mapOptions = {
+            center: new google.maps.LatLng(13.724618, 100.584682),
+            zoom: 15
+        }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script> -->
 
 </head>
 

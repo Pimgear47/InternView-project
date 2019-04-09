@@ -5,9 +5,10 @@
         :src="'../images/data/List/' + orgData.headerpic"
         style="height: 100%; width: 100%; object-fit: contain;"
       >
-      <div class="container mt-4 mb-3">
+      <div class="container mt-4 mb-3" style="height:100%;">
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
+        <div id="map-canvas" style="height:100%; width:100%"></div>
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews" :key="review.review_id">
