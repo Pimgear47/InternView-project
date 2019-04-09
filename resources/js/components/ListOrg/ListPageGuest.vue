@@ -5,11 +5,6 @@
         <div class="col-md-10">
           <h2>รายชื่อบริษัทและองค์กร</h2>
         </div>
-        <div class="col-md-2">
-          <h2>
-            <a href="/listorgs/create" class="btn btn-primary float-right" role="button">Add Data</a>
-          </h2>
-        </div>
         <div class="col-md-12 mt-3">
           <div class="row">
             <div class="col-md-8 col-lg-9">
@@ -41,7 +36,6 @@
                         <div class="like-icon">&#10084; &nbsp;</div>
                       </div>&nbsp;
                       <span>Rating: {{CalRating(ListOrg)}}/5</span>&nbsp;
-                      <span></span>
                     </div>
                   </div>
                 </div>

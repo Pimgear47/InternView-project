@@ -44,12 +44,10 @@
                       role="button"
                     >Edit</a>
                     <div class="row p-3">
-                      <div
-                        class="inline text-left"
-                        v-for="i in parseInt(Math.round(ListOrg.rating))"
-                        :key="i.id"
-                      ><div class="like-icon">&#10084; &nbsp;</div></div>&nbsp;
-                      <span>Rating: {{Math.round(ListOrg.rating)}}/5</span>
+                      <div class="inline text-left" v-for="i in CalRating(ListOrg)" :key="i.id">
+                        <div class="like-icon">&#10084; &nbsp;</div>
+                      </div>&nbsp;
+                      <span>Rating: {{CalRating(ListOrg)}}/5</span>&nbsp;
                     </div>
                   </div>
                 </div>
@@ -68,14 +66,14 @@
                     <option>network</option>
                   </select>
                 </div>
-                <label class="title" for="customRange3">Rating ขั้นต่ำ : {{rating}}</label>
+                <label class="title" for="customRange3">Rating ขั้นต่ำ : {{rating_s}}</label>
                 <input
-                  v-model="rating"
+                  v-model="rating_s"
                   type="range"
                   class="custom-range"
                   min="0"
                   max="5"
-                  step="0.5"
+                  step="1"
                   id="customRange3"
                 >
               </div>
@@ -109,20 +107,25 @@ export default {
             console.log(error);
           });
       }
+    },
+    CalRating(ListOrg) {
+      var rating = 0;
+      var avg = 0;
+      if (ListOrg.review.length != 0) {
+        for (var i = 0; i < ListOrg.review.length; i++) {
+          rating += parseInt(ListOrg.review[i].rating);
+        }
+        avg = rating / ListOrg.review.length;
+      } else avg = 0;
+      return avg;
     }
   },
   data() {
     return {
       ListOrgs: [],
-      ListOrg: {
-        id: 0,
-        picture: "",
-        name_org: "",
-        rating: 0
-      },
       search: "",
       type: "",
-      rating: "0"
+      rating_s: "0"
     };
   },
   computed: {
@@ -130,7 +133,7 @@ export default {
       return this.ListOrgs.filter(ListOrg => {
         return (
           ListOrg.name_org.match(this.search) &&
-          ListOrg.rating >= parseInt(this.rating) &&
+          this.CalRating(ListOrg) >= parseInt(this.rating_s) &&
           ListOrg.type.match(this.type)
         );
       });

@@ -8,13 +8,13 @@
       <div class="container mt-4 mb-3" style="height:100%;">
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
-        <div id="map-canvas" style="height:100%; width:100%"></div>
+        <div id="map-canvas" style="height:50%; width:50%"></div>
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews" :key="review.review_id">
-            <div class="row p-2">
-              <div class="col-md-2"></div>
-              <div class="col-md-10">
+            <div class="row p-3">
+              <!-- <div class="col-md-2"></div> -->
+              <div class="col-md-12">
                 <h1 class="txt-regular">
                   <b>{{review.user.firstname}} {{review.user.lastname}}</b>
                 </h1>

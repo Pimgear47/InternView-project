@@ -2321,8 +2321,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getOrgData();
@@ -2345,20 +2343,28 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       }
+    },
+    CalRating: function CalRating(ListOrg) {
+      var rating = 0;
+      var avg = 0;
+
+      if (ListOrg.review.length != 0) {
+        for (var i = 0; i < ListOrg.review.length; i++) {
+          rating += parseInt(ListOrg.review[i].rating);
+        }
+
+        avg = rating / ListOrg.review.length;
+      } else avg = 0;
+
+      return avg;
     }
   },
   data: function data() {
     return {
       ListOrgs: [],
-      ListOrg: {
-        id: 0,
-        picture: "",
-        name_org: "",
-        rating: 0
-      },
       search: "",
       type: "",
-      rating: "0"
+      rating_s: "0"
     };
   },
   computed: {
@@ -2366,7 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       return this.ListOrgs.filter(function (ListOrg) {
-        return ListOrg.name_org.match(_this3.search) && ListOrg.rating >= parseInt(_this3.rating) && ListOrg.type.match(_this3.type);
+        return ListOrg.name_org.match(_this3.search) && _this3.CalRating(ListOrg) >= parseInt(_this3.rating_s) && ListOrg.type.match(_this3.type);
       });
     }
   }
@@ -2383,12 +2389,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -38726,256 +38726,6 @@ var render = function() {
                             "div",
                             { staticClass: "row p-3" },
                             [
-                              _vm._l(
-                                parseInt(Math.round(ListOrg.rating)),
-                                function(i) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: i.id,
-                                      staticClass: "inline text-left"
-                                    },
-                                    [
-                                      _c("div", { staticClass: "like-icon" }, [
-                                        _vm._v("❤  ")
-                                      ])
-                                    ]
-                                  )
-                                }
-                              ),
-                              _vm._v(" \n                    "),
-                              _c("span", [
-                                _vm._v(
-                                  "Rating: " +
-                                    _vm._s(Math.round(ListOrg.rating)) +
-                                    "/5"
-                                )
-                              ])
-                            ],
-                            2
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                0
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
-                _c("div", { staticClass: "card-wo-r shadow p-3" }, [
-                  _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search,
-                        expression: "search"
-                      }
-                    ],
-                    staticClass: "form-control mb-3",
-                    attrs: { type: "text", placeholder: "Search" },
-                    domProps: { value: _vm.search },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.search = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "title", attrs: { for: "sel1" } },
-                      [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.type,
-                            expression: "type"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "sel1" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.type = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c("option", [_vm._v("All")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("software")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("hardware")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("network")])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "title", attrs: { for: "customRange3" } },
-                    [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating))]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.rating,
-                        expression: "rating"
-                      }
-                    ],
-                    staticClass: "custom-range",
-                    attrs: {
-                      type: "range",
-                      min: "0",
-                      max: "5",
-                      step: "0.5",
-                      id: "customRange3"
-                    },
-                    domProps: { value: _vm.rating },
-                    on: {
-                      __r: function($event) {
-                        _vm.rating = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-10" }, [
-      _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c("h2", [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary float-right",
-            attrs: { href: "/listorgs/create", role: "button" }
-          },
-          [_vm._v("Add Data")]
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListOrg/ListPageGuest.vue?vue&type=template&id=143d2e27&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListOrg/ListPageGuest.vue?vue&type=template&id=143d2e27& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container col-md-10 col-sm-9 col-lg-10 mb-5" },
-    [
-      _c("div", { staticClass: "card border-0 shadow pt-5 pl-5 pr-5 pb-3" }, [
-        _c("div", { staticClass: "row mb-3" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 mt-3" }, [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                { staticClass: "col-md-8 col-lg-9" },
-                _vm._l(_vm.filteredOrgs, function(ListOrg) {
-                  return _c(
-                    "div",
-                    {
-                      key: ListOrg.id,
-                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
-                    },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c("p", { staticStyle: { "text-align": "center" } }, [
-                            _c("img", {
-                              staticStyle: {
-                                height: "100%",
-                                width: "100%",
-                                "object-fit": "contain"
-                              },
-                              attrs: {
-                                src: "images/data/List/" + ListOrg.picture
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-10 mt-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "txt-bold text-link",
-                              attrs: { href: "/listorgs/" + ListOrg.id }
-                            },
-                            [_vm._v(_vm._s(ListOrg.name_org))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "row p-3" },
-                            [
                               _vm._l(_vm.CalRating(ListOrg), function(i) {
                                 return _c(
                                   "div",
@@ -38998,8 +38748,7 @@ var render = function() {
                                     "/5"
                                 )
                               ]),
-                              _vm._v(" \n                    "),
-                              _c("span")
+                              _vm._v(" \n                  ")
                             ],
                             2
                           )
@@ -39157,6 +38906,235 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListOrg/ListPageGuest.vue?vue&type=template&id=143d2e27&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListOrg/ListPageGuest.vue?vue&type=template&id=143d2e27& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container col-md-10 col-sm-9 col-lg-10 mb-5" },
+    [
+      _c("div", { staticClass: "card border-0 shadow pt-5 pl-5 pr-5 pb-3" }, [
+        _c("div", { staticClass: "row mb-3" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12 mt-3" }, [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-8 col-lg-9" },
+                _vm._l(_vm.filteredOrgs, function(ListOrg) {
+                  return _c(
+                    "div",
+                    {
+                      key: ListOrg.id,
+                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-2" }, [
+                          _c("p", { staticStyle: { "text-align": "center" } }, [
+                            _c("img", {
+                              staticStyle: {
+                                height: "100%",
+                                width: "100%",
+                                "object-fit": "contain"
+                              },
+                              attrs: {
+                                src: "images/data/List/" + ListOrg.picture
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-10 mt-2" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "txt-bold text-link",
+                              attrs: { href: "/listorgs/" + ListOrg.id }
+                            },
+                            [_vm._v(_vm._s(ListOrg.name_org))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row p-3" },
+                            [
+                              _vm._l(_vm.CalRating(ListOrg), function(i) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: i.id,
+                                    staticClass: "inline text-left"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "like-icon" }, [
+                                      _vm._v("❤  ")
+                                    ])
+                                  ]
+                                )
+                              }),
+                              _vm._v(" \n                    "),
+                              _c("span", [
+                                _vm._v(
+                                  "Rating: " +
+                                    _vm._s(_vm.CalRating(ListOrg)) +
+                                    "/5"
+                                )
+                              ]),
+                              _vm._v(" \n                  ")
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
+                _c("div", { staticClass: "card-wo-r shadow p-3" }, [
+                  _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search,
+                        expression: "search"
+                      }
+                    ],
+                    staticClass: "form-control mb-3",
+                    attrs: { type: "text", placeholder: "Search" },
+                    domProps: { value: _vm.search },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      { staticClass: "title", attrs: { for: "sel1" } },
+                      [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.type,
+                            expression: "type"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "sel1" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.type = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", [_vm._v("All")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("software")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("hardware")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("network")])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "title", attrs: { for: "customRange3" } },
+                    [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating_s))]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.rating_s,
+                        expression: "rating_s"
+                      }
+                    ],
+                    staticClass: "custom-range",
+                    attrs: {
+                      type: "range",
+                      min: "0",
+                      max: "5",
+                      step: "1",
+                      id: "customRange3"
+                    },
+                    domProps: { value: _vm.rating_s },
+                    on: {
+                      __r: function($event) {
+                        _vm.rating_s = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-10" }, [
+      _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListOrg/ShowOrgGuest.vue?vue&type=template&id=061134f6&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListOrg/ShowOrgGuest.vue?vue&type=template&id=061134f6& ***!
@@ -39202,7 +39180,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", {
-              staticStyle: { height: "100%", width: "100%" },
+              staticStyle: { height: "50%", width: "50%" },
               attrs: { id: "map-canvas" }
             }),
             _vm._v(" "),
@@ -39217,10 +39195,8 @@ var render = function() {
                       "div",
                       { key: review.review_id, staticClass: "box" },
                       [
-                        _c("div", { staticClass: "row p-2" }, [
-                          _c("div", { staticClass: "col-md-2" }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md-10" }, [
+                        _c("div", { staticClass: "row p-3" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
                             _c("h1", { staticClass: "txt-regular" }, [
                               _c("b", [
                                 _vm._v(
