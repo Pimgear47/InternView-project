@@ -19,7 +19,7 @@
             <div class="col-md-8 col-lg-9">
               <div
                 class="card-wo-r shadow col-lg-12 p-2 mb-2"
-                v-for="(ListAnn , index) in filteredAnns"
+                v-for="(ListAnn) in filteredAnns"
                 :key="ListAnn.id"
               >
                 <div class="row pl-4 pr-4">
@@ -32,6 +32,7 @@
                   <span>
                     ลงประกาศเมื่อ
                     <b>{{ListAnn.created_at}}</b>
+                    โดย <d>{{ListAnn.announcer}}</d>
                   </span>
                 </div>
                 <div class="row pl-4 pb-2 pr-4">
@@ -42,12 +43,6 @@
                   <div class="like-icon">&#9660;</div>
                   <span>&nbsp;{{ListAnn.address}}</span>
                 </div>
-                <a
-                    href="javascript:;"
-                    class="btn btn-sm btn-danger float-right Del"
-                    role="button"
-                    v-on:click="deleteAnn(ListAnn.id,index)"
-                  >Delete</a>
               </div>
             </div>
             <div class="col-md-4 col-lg-3 float-right mb-2">
@@ -73,18 +68,6 @@ export default {
       axios.get("api/listannouncement").then(response => {
         this.ListAnns = response.data;
       });
-    },
-    deleteAnn(id, index) {
-      if (confirm("Do you really want to delete?")) {
-        axios
-          .delete("api/listannouncement/" + id)
-          .then(response => {
-            this.ListAnns.splice(index, 1);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
     }
   },
   data() {

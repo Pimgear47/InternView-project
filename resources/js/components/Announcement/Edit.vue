@@ -3,19 +3,31 @@
     <div class="card border-0 shadow">
       <div class="container mt-3">
         <h2 class="text-center title">แก้ไขข้อมูล</h2>
-        <form :action="'/listorgs/'+id">
+        <form :action="'/listannouncement/'+id">
+          <div class="form-group">
+            <label>title:</label>
+            <input type="text" class="form-control" v-model="title">
+          </div>
           <div class="form-group">
             <label>name_org:</label>
             <input type="text" class="form-control" v-model="name_org">
           </div>
           <div class="form-group">
-            <label>description:</label>
+            <label>announcer:</label>
+            <input type="text" class="form-control" v-model="announcer">
+          </div>
+          <div class="form-group">
+            <label>detail:</label>
             <textarea
               class="form-control mb-2"
               id="exampleFormControlTextarea1"
-              rows="5"
-              v-model="description"
+              rows="8"
+              v-model="detail"
             ></textarea>
+          </div>
+          <div class="form-group">
+            <label>contact_person:</label>
+            <input type="text" class="form-control" v-model="contact_person">
           </div>
           <div class="form-group">
             <label>address:</label>
@@ -35,25 +47,33 @@ export default {
   props: ["id"],
   data() {
     return {
+      title: "",
       name_org: "",
-      description: "",
+      announcer: "",
+      detail: "",
+      contact_person: "",
       address: ""
     };
   },
   mounted() {
     axios.get("/api/listannouncement/" + this.id).then(response => {
       var ArrayData = response.data;
-      this.orgData = ArrayData.ListOrg;
-      this.name_org = this.orgData.name_org;
-      this.description = this.orgData.description;
-      this.address = this.orgData.address;
+      this.title = ArrayData.title;
+      this.name_org = ArrayData.name_org;
+      this.announcer = ArrayData.announcer;
+      this.detail = ArrayData.detail;
+      this.contact_person = ArrayData.contact_person;
+      this.address = ArrayData.address;
     });
   },
   methods: {
     updateUser() {
       axios.put("/api/listannouncement/" + this.id, {
+        title: this.title,
         name_org: this.name_org,
-        description: this.description,
+        announcer: this.announcer,
+        detail: this.detail,
+        contact_person: this.contact_person,
         address: this.address
       });
     }

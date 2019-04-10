@@ -2,11 +2,14 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
       <div class="container mt-5 mb-3">
-        <h3>{{this.title}}</h3>
+        <div class="row">
+          <div class="col-md-10"><h3>{{this.title}}</h3></div>
+        </div>
         <div class="row pl-4 pt-2 pb-2">
           <span class="text txt-regular">
             ลงประกาศเมื่อ
             <b>{{created_at}}</b>
+            โดย {{announcer}}
           </span>
         </div>
         <div class="row pl-4 pb-2 pr-4">
@@ -55,6 +58,7 @@ export default {
       var ArrayData = response.data;
       this.title = ArrayData.title;
       this.name_org = ArrayData.name_org;
+      this.announcer = ArrayData.announcer;
       this.address = ArrayData.address;
       this.detail = ArrayData.detail;
       this.contact_person = ArrayData.contact_person;

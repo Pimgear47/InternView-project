@@ -82,7 +82,15 @@ class AnnouncementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $announcement = Announcement::find($id);
+        $announcement->title = $request->get('title');
+        $announcement->name_org = $request->get('name_org');
+        $announcement->announcer = $request->get('announcer');
+        $announcement->detail = $request->get('detail');
+        $announcement->contact_person = $request->get('contact_person');
+        $announcement->address = $request->get('address');
+        $announcement->update();
+        return response()->json($announcement);
     }
 
     /**

@@ -58,7 +58,8 @@ class AnnouncementController extends Controller
      */
     public function edit($id)
     {
-        //
+        $announcement=Announcement::find($id);
+        return view('Page/Announcement/edit',compact('id'));
     }
 
     /**
