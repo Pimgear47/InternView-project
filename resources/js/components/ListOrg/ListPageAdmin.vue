@@ -38,11 +38,6 @@
                       :href="'/listorgs/'+ ListOrg.id"
                       class="txt-bold text-link"
                     >{{ListOrg.name_org}}</a>
-                    <a
-                      :href="'/listorgs/'+ ListOrg.id +'/edit'"
-                      class="btn btn-sm btn-warning float-right"
-                      role="button"
-                    >Edit</a>
                     <div class="row p-3">
                       <div class="inline text-left" v-for="i in CalRating(ListOrg)" :key="i.id">
                         <div class="like-icon">&#10084; &nbsp;</div>

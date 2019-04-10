@@ -294,3 +294,11 @@ body {
 .tags a:hover:before {
     border-color: transparent #555 transparent transparent;
 } */
+
+.Del {
+    margin: 0;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    list-style: none;
+}

@@ -17,6 +17,7 @@ Vue.component('show-org-guest', require('./components/ListOrg/ShowOrgGuest.vue')
 Vue.component('list-announcement', require('./components/Announcement/ListAnnouncement.vue').default);
 Vue.component('create-ann', require('./components/Announcement/CreateAnn.vue').default);
 Vue.component('show-ann', require('./components/Announcement/ShowAnn.vue').default);
+Vue.component('edit-ann', require('./components/Announcement/Edit.vue').default);
 
 const app = new Vue({
     el: '#app'

@@ -6,7 +6,19 @@
         style="height: 100%; width: 100%; object-fit: contain;"
       >
       <div class="container mt-4 mb-3">
-        <h2 class="title">{{orgData.name_org}}</h2>
+        <div class="row">
+          <div class="col-md-10">
+            <h2 class="title">{{orgData.name_org}}</h2>
+          </div>
+          <div class="col-md-2" v-if="usernow.admin">
+            <a
+              :href="'/listorgs/'+ id +'/edit'"
+              class="btn btn-sm btn-warning float-right"
+              role="button"
+            >Edit</a>
+          </div>
+        </div>
+
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
         <hr>
@@ -36,7 +48,9 @@
         </div>
         <hr>
         <div class="form-group" v-if="this.reviews.some(checkPost)">
-          <span><center>You have already reviewed this organization.</center></span>
+          <span>
+            <center>You have already reviewed this organization.</center>
+          </span>
         </div>
         <div class="form-group" v-else>
           <h1 class="txt-regular">รีวิวให้กับสถานที่ฝึกงานนี้</h1>

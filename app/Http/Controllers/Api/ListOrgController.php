@@ -81,6 +81,8 @@ class ListOrgController extends Controller
     {
         $listorg=ListOrg::find($id);
         $listorg->name_org = $request->get('name_org');
+        $listorg->description=$request->get('description');
+        $listorg->address=$request->get('address');
         $listorg->update();
         return response()->json($listorg);
     }

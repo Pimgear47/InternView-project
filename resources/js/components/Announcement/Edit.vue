@@ -41,7 +41,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("/api/listorgs/" + this.id).then(response => {
+    axios.get("/api/listannouncement/" + this.id).then(response => {
       var ArrayData = response.data;
       this.orgData = ArrayData.ListOrg;
       this.name_org = this.orgData.name_org;
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     updateUser() {
-      axios.put("/api/listorgs/" + this.id, {
+      axios.put("/api/listannouncement/" + this.id, {
         name_org: this.name_org,
         description: this.description,
         address: this.address

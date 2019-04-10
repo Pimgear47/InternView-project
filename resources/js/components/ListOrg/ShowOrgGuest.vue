@@ -11,7 +11,7 @@
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
-          <div class="box" v-for="review in reviews" :key="review.review_id">
+          <div class="box" v-for="review in reviews.slice().reverse()" :key="review.review_id">
             <div class="row p-3">
               <!-- <div class="col-md-2"></div> -->
               <div class="col-md-12">

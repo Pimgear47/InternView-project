@@ -93,6 +93,8 @@ class AnnouncementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $announcement = Announcement::find($id);
+        $announcement->delete();
+        return response()->json($announcement);
     }
 }
