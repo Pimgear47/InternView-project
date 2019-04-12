@@ -2934,6 +2934,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+function initialize(context) {
+  var mapOptions = {
+    center: new google.maps.LatLng(13.724618, 100.584682),
+    zoom: 15
+  };
+  var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
+}
+
+google.maps.event.addDomListener(window, "load", initialize);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
@@ -2942,7 +2956,9 @@ __webpack_require__.r(__webpack_exports__);
       orgData: {
         name_org: "",
         headerpic: "",
-        description: ""
+        description: "",
+        lat: "",
+        long: ""
       }
     };
   },
@@ -3094,16 +3110,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(13.724618, 100.584682),
+    zoom: 15
+  };
+  var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
+}
+
+google.maps.event.addDomListener(window, "load", initialize);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "usernow"],
   data: function data() {
     return {
       reviews: [],
-      orgData: {
-        name_org: "",
-        headerpic: "",
-        description: ""
-      },
+      orgData: [],
       getReview: {
         getOrgId: this.id,
         getUserId: this.usernow.id,
@@ -40124,126 +40147,130 @@ var render = function() {
           attrs: { src: "../images/data/List/" + _vm.orgData.headerpic }
         }),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "container mt-4 mb-3",
-            staticStyle: { height: "100%" }
-          },
-          [
-            _c("h2", { staticClass: "title" }, [
-              _vm._v(_vm._s(_vm.orgData.name_org))
-            ]),
-            _vm._v(" "),
-            _c("h2", { staticClass: "txt-regular" }, [
-              _vm._v(_vm._s(_vm.orgData.description))
-            ]),
-            _vm._v(" "),
-            _c("h2", { staticClass: "txt-regular" }, [
-              _vm._v("ที่อยู่ : " + _vm._s(_vm.orgData.address))
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _vm.reviews.length != 0
-              ? _c(
-                  "div",
-                  { attrs: { id: "columns-holder" } },
-                  _vm._l(_vm.reviews.slice().reverse(), function(review) {
-                    return _c(
-                      "div",
-                      { key: review.review_id, staticClass: "box" },
-                      [
-                        _c("div", { staticClass: "row p-3" }, [
-                          _c("div", { staticClass: "col-md-12" }, [
-                            _c("h1", { staticClass: "txt-regular" }, [
-                              _c("b", [
-                                _vm._v(
-                                  _vm._s(review.user.firstname) +
-                                    " " +
-                                    _vm._s(review.user.lastname)
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("h2", { staticClass: "txt-regular" }, [
-                              _vm._v("# " + _vm._s(review.created_at))
-                            ]),
-                            _vm._v(" "),
-                            _c("h2", { staticClass: "txt-regular" }, [
-                              _vm._v(_vm._s(review.description))
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "row ml-1" },
-                              _vm._l(parseInt(review.rating), function(i) {
-                                return _c(
-                                  "div",
-                                  { key: i.id, staticClass: "like-icon" },
-                                  [_vm._v("❤  ")]
-                                )
-                              }),
-                              0
-                            )
-                          ])
+        _c("div", { staticClass: "container mt-4 mb-3" }, [
+          _c("h2", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.orgData.name_org))
+          ]),
+          _vm._v(" "),
+          _c("h2", { staticClass: "txt-regular" }, [
+            _vm._v(_vm._s(_vm.orgData.description))
+          ]),
+          _vm._v(" "),
+          _c("h2", { staticClass: "txt-regular" }, [
+            _vm._v("ที่อยู่ : " + _vm._s(_vm.orgData.address))
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "container mt-4 mb-3" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _vm.reviews.length != 0
+            ? _c(
+                "div",
+                { attrs: { id: "columns-holder" } },
+                _vm._l(_vm.reviews.slice().reverse(), function(review) {
+                  return _c(
+                    "div",
+                    { key: review.review_id, staticClass: "box" },
+                    [
+                      _c("div", { staticClass: "row p-3" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("h1", { staticClass: "txt-regular" }, [
+                            _c("b", [
+                              _vm._v(
+                                _vm._s(review.user.firstname) +
+                                  " " +
+                                  _vm._s(review.user.lastname)
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _vm._v("# " + _vm._s(review.created_at))
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", { staticClass: "txt-regular" }, [
+                            _vm._v(_vm._s(review.description))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row ml-1" },
+                            _vm._l(parseInt(review.rating), function(i) {
+                              return _c(
+                                "div",
+                                { key: i.id, staticClass: "like-icon" },
+                                [_vm._v("❤  ")]
+                              )
+                            }),
+                            0
+                          )
                         ])
-                      ]
-                    )
-                  }),
-                  0
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.reviews.length == 0
-              ? _c("div", [
-                  _c("h1", { staticClass: "txt-regular text-center" }, [
-                    _vm._v(
-                      "There aren’t any reviews for this organization yet."
-                    )
-                  ])
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.reviews.length == 0
+            ? _c("div", [
+                _c("h1", { staticClass: "txt-regular text-center" }, [
+                  _vm._v("There aren’t any reviews for this organization yet.")
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "div",
-              [
-                _c("center", [
-                  _c("span", [
-                    _vm._v(
-                      "\n            If you have any review to share, please login first\n            "
-                    ),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-outline-primary mr-2 ml-2",
-                        attrs: { href: "/login" }
-                      },
-                      [_vm._v("Login")]
-                    ),
-                    _vm._v("\n            or\n            "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-outline-primary mr-2 ml-2",
-                        attrs: { href: "/register" }
-                      },
-                      [_vm._v("Sign up")]
-                    )
-                  ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("center", [
+                _c("span", [
+                  _vm._v(
+                    "\n            If you have any review to share, please login first\n            "
+                  ),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-primary mr-2 ml-2",
+                      attrs: { href: "/login" }
+                    },
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v("\n            or\n            "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-outline-primary mr-2 ml-2",
+                      attrs: { href: "/register" }
+                    },
+                    [_vm._v("Sign up")]
+                  )
                 ])
-              ],
-              1
-            )
-          ]
-        )
+              ])
+            ],
+            1
+          )
+        ])
       ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { attrs: { id: "map_canvas1" } })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -40280,28 +40307,22 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "container mt-4 mb-3" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-10" }, [
-              _c("h2", { staticClass: "title" }, [
-                _vm._v(_vm._s(_vm.orgData.name_org))
-              ])
-            ]),
-            _vm._v(" "),
-            _vm.usernow.admin
-              ? _c("div", { staticClass: "col-md-2" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-sm btn-warning float-right",
-                      attrs: {
-                        href: "/listorgs/" + _vm.id + "/edit",
-                        role: "button"
-                      }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ])
-              : _vm._e()
+          _vm.usernow.admin
+            ? _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-warning float-right",
+                  attrs: {
+                    href: "/listorgs/" + _vm.id + "/edit",
+                    role: "button"
+                  }
+                },
+                [_vm._v("Edit")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("h2", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.orgData.name_org))
           ]),
           _vm._v(" "),
           _c("h2", { staticClass: "txt-regular" }, [
@@ -40310,6 +40331,16 @@ var render = function() {
           _vm._v(" "),
           _c("h2", { staticClass: "txt-regular" }, [
             _vm._v("ที่อยู่ : " + _vm._s(_vm.orgData.address))
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "container mt-4 mb-3" }, [
+          _c("div", { staticClass: "row" }, [
+            _vm.usernow.admin
+              ? _c("div", { staticClass: "col-md-2" })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("hr"),
@@ -40318,7 +40349,7 @@ var render = function() {
             ? _c(
                 "div",
                 { attrs: { id: "columns-holder" } },
-                _vm._l(_vm.reviews, function(review) {
+                _vm._l(_vm.reviews.slice().reverse(), function(review) {
                   return _c(
                     "div",
                     { key: review.review_id, staticClass: "box" },
@@ -40604,7 +40635,16 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { attrs: { id: "map_canvas1" } })
+    ])
+  }
+]
 render._withStripped = true
 
 

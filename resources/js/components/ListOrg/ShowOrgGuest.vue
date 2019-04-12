@@ -5,10 +5,15 @@
         :src="'../images/data/List/' + orgData.headerpic"
         style="height: 100%; width: 100%; object-fit: contain;"
       >
-      <div class="container mt-4 mb-3" style="height:100%;">
+      <div class="container mt-4 mb-3">
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
+      </div>
+      <div class="container">
+        <div id="map_canvas1"></div>
+      </div>
+      <div class="container mt-4 mb-3">
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews.slice().reverse()" :key="review.review_id">
@@ -54,6 +59,17 @@
 </template>
 
 <script>
+function initialize(context) {
+  var mapOptions = {
+    center: new google.maps.LatLng(13.724618, 100.584682),
+    zoom: 15
+  };
+  var map = new google.maps.Map(
+    document.getElementById("map_canvas1"),
+    mapOptions
+  );
+}
+google.maps.event.addDomListener(window, "load", initialize);
 export default {
   props: ["id"],
   data() {
@@ -62,7 +78,9 @@ export default {
       orgData: {
         name_org: "",
         headerpic: "",
-        description: ""
+        description: "",
+        lat: "",
+        long: ""
       }
     };
   },

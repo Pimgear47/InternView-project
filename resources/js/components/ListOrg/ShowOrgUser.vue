@@ -6,24 +6,26 @@
         style="height: 100%; width: 100%; object-fit: contain;"
       >
       <div class="container mt-4 mb-3">
-        <div class="row">
-          <div class="col-md-10">
-            <h2 class="title">{{orgData.name_org}}</h2>
-          </div>
-          <div class="col-md-2" v-if="usernow.admin">
-            <a
-              :href="'/listorgs/'+ id +'/edit'"
-              class="btn btn-sm btn-warning float-right"
-              role="button"
-            >Edit</a>
-          </div>
-        </div>
+        <a v-if="usernow.admin"
+          :href="'/listorgs/'+ id +'/edit'"
+          class="btn btn-sm btn-warning float-right"
+          role="button"
+        >Edit</a>
 
+        <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
+      </div>
+      <div class="container">
+        <div id="map_canvas1"></div>
+      </div>
+      <div class="container mt-4 mb-3">
+        <div class="row">
+          <div class="col-md-2" v-if="usernow.admin"></div>
+        </div>
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
-          <div class="box" v-for="review in reviews" :key="review.review_id">
+          <div class="box" v-for="review in reviews.slice().reverse()" :key="review.review_id">
             <div class="row p-3">
               <!-- <div class="col-md-2"></div> -->
               <div class="col-md-12">
@@ -118,16 +120,23 @@
 </template>
 
 <script>
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(13.724618, 100.584682),
+    zoom: 15
+  };
+  var map = new google.maps.Map(
+    document.getElementById("map_canvas1"),
+    mapOptions
+  );
+}
+google.maps.event.addDomListener(window, "load", initialize);
 export default {
   props: ["id", "usernow"],
   data() {
     return {
       reviews: [],
-      orgData: {
-        name_org: "",
-        headerpic: "",
-        description: ""
-      },
+      orgData: [],
       getReview: {
         getOrgId: this.id,
         getUserId: this.usernow.id,
@@ -184,7 +193,7 @@ export default {
             description: review.description,
             user: review.user,
             rating: review.rating,
-            created_at: review.created_at
+            created_at: review.created_at,
           };
         });
       });
