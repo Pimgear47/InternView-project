@@ -6,7 +6,8 @@
         style="height: 100%; width: 100%; object-fit: contain;"
       >
       <div class="container mt-4 mb-3">
-        <a v-if="usernow.admin"
+        <a
+          v-if="usernow.admin"
           :href="'/listorgs/'+ id +'/edit'"
           class="btn btn-sm btn-warning float-right"
           role="button"
@@ -120,17 +121,6 @@
 </template>
 
 <script>
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(13.724618, 100.584682),
-    zoom: 15
-  };
-  var map = new google.maps.Map(
-    document.getElementById("map_canvas1"),
-    mapOptions
-  );
-}
-google.maps.event.addDomListener(window, "load", initialize);
 export default {
   props: ["id", "usernow"],
   data() {
@@ -147,6 +137,8 @@ export default {
   },
   mounted() {
     this.getData();
+    this.initialize();
+    google.maps.event.addDomListener(window, "load", initialize);
   },
   methods: {
     addNewReview() {
@@ -193,13 +185,23 @@ export default {
             description: review.description,
             user: review.user,
             rating: review.rating,
-            created_at: review.created_at,
+            created_at: review.created_at
           };
         });
       });
     },
     checkPost(Arr) {
       return Arr.user.id == this.usernow.id;
+    },
+    initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
+        zoom: 15
+      };
+      var map = new google.maps.Map(
+        document.getElementById("map_canvas1"),
+        mapOptions
+      );
     }
   }
 };

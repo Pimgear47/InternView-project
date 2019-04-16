@@ -2939,15 +2939,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-function initialize(context) {
-  var mapOptions = {
-    center: new google.maps.LatLng(13.724618, 100.584682),
-    zoom: 15
-  };
-  var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
-}
-
-google.maps.event.addDomListener(window, "load", initialize);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
@@ -2957,8 +2948,8 @@ google.maps.event.addDomListener(window, "load", initialize);
         name_org: "",
         headerpic: "",
         description: "",
-        lat: "",
-        long: ""
+        Lat: "",
+        Lng: ""
       }
     };
   },
@@ -2977,6 +2968,17 @@ google.maps.event.addDomListener(window, "load", initialize);
         };
       });
     });
+    this.initialize();
+    google.maps.event.addDomListener(window, "load", initialize);
+  },
+  methods: {
+    initialize: function initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
+        zoom: 15
+      };
+      var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
+    }
   }
 });
 
@@ -3112,15 +3114,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(13.724618, 100.584682),
-    zoom: 15
-  };
-  var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
-}
-
-google.maps.event.addDomListener(window, "load", initialize);
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "usernow"],
   data: function data() {
@@ -3137,6 +3131,8 @@ google.maps.event.addDomListener(window, "load", initialize);
   },
   mounted: function mounted() {
     this.getData();
+    this.initialize();
+    google.maps.event.addDomListener(window, "load", initialize);
   },
   methods: {
     addNewReview: function addNewReview() {
@@ -3190,6 +3186,13 @@ google.maps.event.addDomListener(window, "load", initialize);
     },
     checkPost: function checkPost(Arr) {
       return Arr.user.id == this.usernow.id;
+    },
+    initialize: function initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
+        zoom: 15
+      };
+      var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
     }
   }
 });
@@ -53707,14 +53710,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/js/components/ListOrg/ShowOrgGuest.vue ***!
   \**********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ShowOrgGuest_vue_vue_type_template_id_061134f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowOrgGuest.vue?vue&type=template&id=061134f6& */ "./resources/js/components/ListOrg/ShowOrgGuest.vue?vue&type=template&id=061134f6&");
 /* harmony import */ var _ShowOrgGuest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowOrgGuest.vue?vue&type=script&lang=js& */ "./resources/js/components/ListOrg/ShowOrgGuest.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ShowOrgGuest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ShowOrgGuest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -53744,7 +53748,7 @@ component.options.__file = "resources/js/components/ListOrg/ShowOrgGuest.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/ListOrg/ShowOrgGuest.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

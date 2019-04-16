@@ -59,17 +59,6 @@
 </template>
 
 <script>
-function initialize(context) {
-  var mapOptions = {
-    center: new google.maps.LatLng(13.724618, 100.584682),
-    zoom: 15
-  };
-  var map = new google.maps.Map(
-    document.getElementById("map_canvas1"),
-    mapOptions
-  );
-}
-google.maps.event.addDomListener(window, "load", initialize);
 export default {
   props: ["id"],
   data() {
@@ -79,8 +68,8 @@ export default {
         name_org: "",
         headerpic: "",
         description: "",
-        lat: "",
-        long: ""
+        Lat: "",
+        Lng: ""
       }
     };
   },
@@ -97,6 +86,20 @@ export default {
         };
       });
     });
+    this.initialize();
+    google.maps.event.addDomListener(window, "load", initialize);
+  },
+  methods: {
+    initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
+        zoom: 15
+      };
+      var map = new google.maps.Map(
+        document.getElementById("map_canvas1"),
+        mapOptions
+      );
+    }
   }
 };
 </script>
