@@ -90,7 +90,7 @@ export default {
       var avg = 0;
       if (ListOrg.review.length != 0) {
         for (var i = 0; i < ListOrg.review.length; i++) {
-          rating += parseInt(ListOrg.review[i].rating);
+          rating += parseFloat(ListOrg.review[i].rating);
         }
         avg = rating / ListOrg.review.length;
       } else avg = 0;
