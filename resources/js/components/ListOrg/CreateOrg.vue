@@ -9,6 +9,11 @@
             <input type="text" class="form-control" v-model="name_org">
           </div>
           <div class="form-group">
+            <label>picture:</label>
+            <input type="file" v-on:change="onImageChange" class="form-control">
+            <img :src="image" class="img-responsive" height="70" width="90">
+          </div>
+          <div class="form-group">
             <label>description:</label>
             <textarea
               class="form-control mb-2"
@@ -37,15 +42,38 @@ export default {
       name_org: "",
       description: "",
       address: "",
+      image: ""
     };
   },
   methods: {
     addNewOrg() {
-      axios.post("/api/listorgs", {
-        name_org: this.name_org,
-        description: this.description,
-        address: this.address
-      });
+      axios
+        .post("/api/listorgs", {
+          name_org: this.name_org,
+          description: this.description,
+          address: this.address,
+          picture: this.image
+        })
+        .then(response => {
+          if (response.data.success) {
+            alert(response.data.success);
+          }
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    },
+    onImageChange(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      let reader = new FileReader();
+      reader.onload = e => {
+        this.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 };

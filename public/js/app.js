@@ -2475,12 +2475,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       name_org: "",
       description: "",
-      address: ""
+      address: "",
+      image: ""
     };
   },
   methods: {
@@ -2488,8 +2494,31 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/listorgs", {
         name_org: this.name_org,
         description: this.description,
-        address: this.address
+        address: this.address,
+        picture: this.image
+      }).then(function (response) {
+        if (response.data.success) {
+          alert(response.data.success);
+        }
+      }).catch(function (error) {
+        console.log(error.message);
       });
+    },
+    onImageChange: function onImageChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var _this = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this.image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
     }
   }
 });
@@ -2698,7 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
           rating += parseInt(ListOrg.review[i].rating);
         }
 
-        avg = rating / ListOrg.review.length;
+        avg = parseInt(rating / ListOrg.review.length);
       } else avg = 0;
 
       return avg;
@@ -2834,10 +2863,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (ListOrg.review.length != 0) {
         for (var i = 0; i < ListOrg.review.length; i++) {
-          rating += parseFloat(ListOrg.review[i].rating);
+          rating += parseInt(ListOrg.review[i].rating);
         }
 
-        avg = rating / ListOrg.review.length;
+        avg = parseInt(rating / ListOrg.review.length);
       } else avg = 0;
 
       return avg;
@@ -39389,6 +39418,21 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("picture:")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "file" },
+                on: { change: _vm.onImageChange }
+              }),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: { src: _vm.image, height: "70", width: "90" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("description:")]),
               _vm._v(" "),
               _c("textarea", {
@@ -39680,7 +39724,9 @@ var render = function() {
                             "div",
                             { staticClass: "row p-3" },
                             [
-                              _vm._l(_vm.CalRating(ListOrg), function(i) {
+                              _vm._l(parseInt(_vm.CalRating(ListOrg)), function(
+                                i
+                              ) {
                                 return _c(
                                   "div",
                                   {
@@ -39942,7 +39988,9 @@ var render = function() {
                             "div",
                             { staticClass: "row p-3" },
                             [
-                              _vm._l(_vm.CalRating(ListOrg), function(i) {
+                              _vm._l(parseInt(_vm.CalRating(ListOrg)), function(
+                                i
+                              ) {
                                 return _c(
                                   "div",
                                   {

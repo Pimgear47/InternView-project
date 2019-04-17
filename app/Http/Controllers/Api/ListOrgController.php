@@ -42,6 +42,13 @@ class ListOrgController extends Controller
         $listorg->name_org=$request->get('name_org');
         $listorg->description=$request->get('description');
         $listorg->address=$request->get('address');
+        if($request->get('image'))
+        {
+          $image = $request->get('image');
+          $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+          Image::make($request->get('image'))->save(public_path('images/').$name);
+        }
+        $listorg->picture = $name;
         $listorg->save();
         return response()->json($listorg);
     }

@@ -28,7 +28,7 @@
                       class="txt-bold text-link"
                     >{{ListOrg.name_org}}</a>
                     <div class="row p-3">
-                      <div class="inline text-left" v-for="i in CalRating(ListOrg)" :key="i.id">
+                      <div class="inline text-left" v-for="i in parseInt(CalRating(ListOrg))" :key="i.id">
                         <div class="like-icon">&#10084; &nbsp;</div>
                       </div>&nbsp;
                       <span>Rating: {{CalRating(ListOrg)}}/5</span>&nbsp;
@@ -90,9 +90,9 @@ export default {
       var avg = 0;
       if (ListOrg.review.length != 0) {
         for (var i = 0; i < ListOrg.review.length; i++) {
-          rating += parseFloat(ListOrg.review[i].rating);
+          rating += parseInt(ListOrg.review[i].rating);
         }
-        avg = rating / ListOrg.review.length;
+        avg = parseInt(rating / ListOrg.review.length);
       } else avg = 0;
       return avg;
     },
