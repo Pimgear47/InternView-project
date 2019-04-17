@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ListOrg;
 use App\Review;
+use Illuminate\Support\Facades\Storage;
 
 class ListOrgController extends Controller
 {
@@ -39,16 +40,12 @@ class ListOrgController extends Controller
     public function store(Request $request)
     {
         $listorg=new ListOrg();
-        $listorg->name_org=$request->get('name_org');
+        $listorg->name_org=$request->get('name_orgS');
         $listorg->description=$request->get('description');
         $listorg->address=$request->get('address');
-        if($request->get('image'))
-        {
-          $image = $request->get('image');
-          $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-          Image::make($request->get('image'))->save(public_path('images/').$name);
+        if ($request->get('image')){
+            $listorg->image=$request->get('image');
         }
-        $listorg->picture = $name;
         $listorg->save();
         return response()->json($listorg);
     }

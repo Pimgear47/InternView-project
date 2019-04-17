@@ -2480,22 +2480,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       name_org: "",
       description: "",
       address: "",
-      image: ""
+      image: "",
+      checkPic: false
     };
   },
   methods: {
     addNewOrg: function addNewOrg() {
       axios.post("/api/listorgs", {
-        name_org: this.name_org,
+        name_orgS: this.name_org,
         description: this.description,
         address: this.address,
-        picture: this.image
+        image: this.image
       }).then(function (response) {
         if (response.data.success) {
           alert(response.data.success);
@@ -2505,17 +2507,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onImageChange: function onImageChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
-    },
-    createImage: function createImage(file) {
       var _this = this;
 
+      var file = e.target.files[0];
+      this.checkPic = true;
       var reader = new FileReader();
 
-      reader.onload = function (e) {
-        _this.image = e.target.result;
+      reader.onloadend = function (e) {
+        _this.image = reader.result;
+        console.log(_this.image);
       };
 
       reader.readAsDataURL(file);
@@ -39390,115 +39390,123 @@ var render = function() {
             _vm._v("เพิ่มข้อมูล")
           ]),
           _vm._v(" "),
-          _c("form", { attrs: { action: "/listorgs" } }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("name_org:")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.name_org,
-                    expression: "name_org"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.name_org },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+          _c(
+            "form",
+            { attrs: { action: "/listorgs", enctype: "multipart/form-data" } },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("name_org:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name_org,
+                      expression: "name_org"
                     }
-                    _vm.name_org = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("picture:")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "file" },
-                on: { change: _vm.onImageChange }
-              }),
-              _vm._v(" "),
-              _c("img", {
-                staticClass: "img-responsive",
-                attrs: { src: _vm.image, height: "70", width: "90" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("description:")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.description,
-                    expression: "description"
-                  }
-                ],
-                staticClass: "form-control mb-2",
-                attrs: { id: "exampleFormControlTextarea1", rows: "5" },
-                domProps: { value: _vm.description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.description = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("address:")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.address,
-                    expression: "address"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.address },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.address = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.name_org },
                   on: {
-                    click: function($event) {
-                      return _vm.addNewOrg()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name_org = $event.target.value
                     }
                   }
-                },
-                [_vm._v("Save")]
-              )
-            ])
-          ])
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("picture:")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "file", name: "image" },
+                  on: { change: _vm.onImageChange }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm.checkPic
+                  ? _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: { src: _vm.image, height: "100" }
+                    })
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("description:")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.description,
+                      expression: "description"
+                    }
+                  ],
+                  staticClass: "form-control mb-2",
+                  attrs: { id: "exampleFormControlTextarea1", rows: "5" },
+                  domProps: { value: _vm.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.description = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("address:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.address,
+                      expression: "address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.address = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        return _vm.addNewOrg()
+                      }
+                    }
+                  },
+                  [_vm._v("Save")]
+                )
+              ])
+            ]
+          )
         ])
       ])
     ]
@@ -39689,9 +39697,7 @@ var render = function() {
                                 width: "100%",
                                 "object-fit": "contain"
                               },
-                              attrs: {
-                                src: "images/data/List/" + ListOrg.picture
-                              }
+                              attrs: { src: ListOrg.image }
                             })
                           ])
                         ]),
@@ -39967,9 +39973,7 @@ var render = function() {
                                 width: "100%",
                                 "object-fit": "contain"
                               },
-                              attrs: {
-                                src: "images/data/List/" + ListOrg.picture
-                              }
+                              attrs: { src: ListOrg.image }
                             })
                           ])
                         ]),

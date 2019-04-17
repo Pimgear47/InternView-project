@@ -22,7 +22,7 @@
                   <div class="col-md-2">
                     <p style="text-align:center;">
                       <img
-                        :src="'images/data/List/' + ListOrg.picture"
+                        :src="ListOrg.image"
                         style="height: 100%; width: 100%; object-fit: contain"
                       >
                     </p>

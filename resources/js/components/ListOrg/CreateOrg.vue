@@ -3,15 +3,16 @@
     <div class="card border-0 shadow pl-5 pr-5 pb-3">
       <div class="container mt-5 mb-3">
         <h2 class="text-center title">เพิ่มข้อมูล</h2>
-        <form action="/listorgs">
+        <form action="/listorgs" enctype="multipart/form-data">
           <div class="form-group">
             <label>name_org:</label>
             <input type="text" class="form-control" v-model="name_org">
           </div>
           <div class="form-group">
             <label>picture:</label>
-            <input type="file" v-on:change="onImageChange" class="form-control">
-            <img :src="image" class="img-responsive" height="70" width="90">
+            <input type="file" @change="onImageChange" name="image" class="form-control">
+            <br>
+            <img :src="image" v-if="checkPic" class="img-responsive" height="100">
           </div>
           <div class="form-group">
             <label>description:</label>
@@ -42,17 +43,18 @@ export default {
       name_org: "",
       description: "",
       address: "",
-      image: ""
+      image: "",
+      checkPic: false
     };
   },
   methods: {
     addNewOrg() {
       axios
         .post("/api/listorgs", {
-          name_org: this.name_org,
+          name_orgS: this.name_org,
           description: this.description,
           address: this.address,
-          picture: this.image
+          image: this.image
         })
         .then(response => {
           if (response.data.success) {
@@ -64,17 +66,15 @@ export default {
         });
     },
     onImageChange(e) {
-      let files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
-    },
-    createImage(file) {
+      let file = e.target.files[0];
+      this.checkPic = true;
       let reader = new FileReader();
-      reader.onload = e => {
-        this.image = e.target.result;
-      };
+      reader.onloadend = (e) => {
+        this.image = reader.result;
+        console.log(this.image);
+      }
       reader.readAsDataURL(file);
-    }
+    },
   }
 };
 </script>
