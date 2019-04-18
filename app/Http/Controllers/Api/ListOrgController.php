@@ -43,6 +43,7 @@ class ListOrgController extends Controller
         $listorg->name_org=$request->get('name_orgS');
         $listorg->description=$request->get('description');
         $listorg->address=$request->get('address');
+        $listorg->type=$request->get('type');
         if ($request->get('image')){
             $listorg->image=$request->get('image');
         }

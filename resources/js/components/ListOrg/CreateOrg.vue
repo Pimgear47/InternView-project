@@ -40,6 +40,15 @@
             <input type="text" class="form-control" v-model="address">
           </div>
           <div class="form-group">
+            <label>Type:&nbsp;&nbsp;</label>
+            <input type="checkbox" id="Software" value="software" v-model="Type">
+            <label for="Software">Software</label>
+            <input type="checkbox" id="Hardware" value="hardware" v-model="Type">
+            <label for="Hardware">Hardware</label>
+            <input type="checkbox" id="Network" value="network" v-model="Type">
+            <label for="Network">Network</label>
+          </div>
+          <div class="form-group">
             <button class="btn btn-primary" v-on:click="addNewOrg()">Save</button>
           </div>
         </form>
@@ -53,6 +62,7 @@ export default {
   data() {
     return {
       errors: [],
+      Type: ['All'],
       name_org: "",
       description: "",
       address: "",
@@ -70,7 +80,8 @@ export default {
           description: this.description,
           address: this.address,
           image: this.image,
-          cover: this.cover
+          cover: this.cover,
+          type: this.Type.join()
         })
         .then(response => {
           if (response.data.success) {
@@ -102,7 +113,13 @@ export default {
       reader.readAsDataURL(file);
     },
     checkForm: function(e) {
-      if (this.name_org && this.description && this.address && this.image && this.cover) {
+      if (
+        this.name_org &&
+        this.description &&
+        this.address &&
+        this.image &&
+        this.cover && this.Type.length != 1
+      ) {
         return true;
       }
       this.errors = [];
@@ -120,6 +137,9 @@ export default {
       }
       if (!this.address) {
         this.errors.push("Address required.");
+      }
+      if (this.Type.length == 1) {
+        this.errors.push("Type required.");
       }
       e.preventDefault();
     }

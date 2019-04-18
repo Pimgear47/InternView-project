@@ -2615,10 +2615,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       errors: [],
+      Type: ['All'],
       name_org: "",
       description: "",
       address: "",
@@ -2635,7 +2645,8 @@ __webpack_require__.r(__webpack_exports__);
         description: this.description,
         address: this.address,
         image: this.image,
-        cover: this.cover
+        cover: this.cover,
+        type: this.Type.join()
       }).then(function (response) {
         if (response.data.success) {
           alert(response.data.success);
@@ -2673,7 +2684,7 @@ __webpack_require__.r(__webpack_exports__);
       reader.readAsDataURL(file);
     },
     checkForm: function checkForm(e) {
-      if (this.name_org && this.description && this.address && this.image && this.cover) {
+      if (this.name_org && this.description && this.address && this.image && this.cover && this.Type.length != 1) {
         return true;
       }
 
@@ -2697,6 +2708,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.address) {
         this.errors.push("Address required.");
+      }
+
+      if (this.Type.length == 1) {
+        this.errors.push("Type required.");
       }
 
       e.preventDefault();
@@ -39871,6 +39886,142 @@ var render = function() {
                     }
                   }
                 })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Type:  ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.Type,
+                      expression: "Type"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    id: "Software",
+                    value: "software"
+                  },
+                  domProps: {
+                    checked: Array.isArray(_vm.Type)
+                      ? _vm._i(_vm.Type, "software") > -1
+                      : _vm.Type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.Type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "software",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.Type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.Type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.Type = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "Software" } }, [
+                  _vm._v("Software")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.Type,
+                      expression: "Type"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    id: "Hardware",
+                    value: "hardware"
+                  },
+                  domProps: {
+                    checked: Array.isArray(_vm.Type)
+                      ? _vm._i(_vm.Type, "hardware") > -1
+                      : _vm.Type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.Type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "hardware",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.Type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.Type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.Type = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "Hardware" } }, [
+                  _vm._v("Hardware")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.Type,
+                      expression: "Type"
+                    }
+                  ],
+                  attrs: { type: "checkbox", id: "Network", value: "network" },
+                  domProps: {
+                    checked: Array.isArray(_vm.Type)
+                      ? _vm._i(_vm.Type, "network") > -1
+                      : _vm.Type
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.Type,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "network",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.Type = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.Type = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.Type = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "Network" } }, [_vm._v("Network")])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
