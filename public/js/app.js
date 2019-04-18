@@ -3161,9 +3161,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
   data: function data() {
@@ -3172,9 +3169,7 @@ __webpack_require__.r(__webpack_exports__);
       orgData: {
         name_org: "",
         headerpic: "",
-        description: "",
-        Lat: "",
-        Lng: ""
+        description: ""
       }
     };
   },
@@ -3193,17 +3188,6 @@ __webpack_require__.r(__webpack_exports__);
         };
       });
     });
-    this.initialize();
-    google.maps.event.addDomListener(window, "load", initialize);
-  },
-  methods: {
-    initialize: function initialize() {
-      var mapOptions = {
-        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
-        zoom: 15
-      };
-      var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
-    }
   }
 });
 
@@ -3340,10 +3324,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "usernow"],
   data: function data() {
     return {
+      errors: [],
       reviews: [],
       orgData: [],
       getReview: {
@@ -3356,8 +3343,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getData();
-    this.initialize();
-    google.maps.event.addDomListener(window, "load", initialize);
   },
   methods: {
     addNewReview: function addNewReview() {
@@ -3389,8 +3374,6 @@ __webpack_require__.r(__webpack_exports__);
         this.getReview.getDescription = "";
         this.getReview.getRating = 0;
         alert("OK");
-      } else {
-        alert("Please Review and rate this");
       }
     },
     getData: function getData() {
@@ -3412,12 +3395,22 @@ __webpack_require__.r(__webpack_exports__);
     checkPost: function checkPost(Arr) {
       return Arr.user.id == this.usernow.id;
     },
-    initialize: function initialize() {
-      var mapOptions = {
-        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
-        zoom: 15
-      };
-      var map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
+    checkForm: function checkForm(e) {
+      if (this.getReview.getDescription && this.getReview.getRating) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.getReview.getDescription) {
+        this.errors.push("Review required.");
+      }
+
+      if (!this.getReview.getRating) {
+        this.errors.push("Rating required.");
+      }
+
+      e.preventDefault();
     }
   }
 });
@@ -40749,8 +40742,6 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
         _c("div", { staticClass: "container mt-4 mb-3" }, [
           _c("hr"),
           _vm._v(" "),
@@ -40849,16 +40840,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { attrs: { id: "map_canvas1" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40921,8 +40903,6 @@ var render = function() {
             _vm._v("ที่อยู่ : " + _vm._s(_vm.orgData.address))
           ])
         ]),
-        _vm._v(" "),
-        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "container mt-4 mb-3" }, [
           _c("div", { staticClass: "row" }, [
@@ -40993,246 +40973,286 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          this.reviews.some(_vm.checkPost)
-            ? _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "span",
-                  [
-                    _c("center", [
-                      _vm._v("You have already reviewed this organization.")
-                    ])
-                  ],
-                  1
-                )
-              ])
-            : _c("div", { staticClass: "form-group" }, [
-                _c("h1", { staticClass: "txt-regular" }, [
-                  _vm._v("รีวิวให้กับสถานที่ฝึกงานนี้")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.getReview.getDescription,
-                      expression: "getReview.getDescription"
-                    }
-                  ],
-                  staticClass: "form-control mb-2",
-                  attrs: { id: "exampleFormControlTextarea1", rows: "3" },
-                  domProps: { value: _vm.getReview.getDescription },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.getReview,
-                        "getDescription",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { attrs: { id: "ratings" } }, [
-                      _c(
-                        "div",
-                        { staticClass: "rating", attrs: { id: "like" } },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.getReview.getRating,
-                                expression: "getReview.getRating"
-                              }
-                            ],
-                            attrs: {
-                              type: "radio",
-                              id: "heart_5",
-                              name: "like",
-                              value: "5"
-                            },
-                            domProps: {
-                              checked: _vm._q(_vm.getReview.getRating, "5")
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(_vm.getReview, "getRating", "5")
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "heart_5", title: "Five" } },
-                            [_vm._v("❤")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.getReview.getRating,
-                                expression: "getReview.getRating"
-                              }
-                            ],
-                            attrs: {
-                              type: "radio",
-                              id: "heart_4",
-                              name: "like",
-                              value: "4"
-                            },
-                            domProps: {
-                              checked: _vm._q(_vm.getReview.getRating, "4")
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(_vm.getReview, "getRating", "4")
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "heart_4", title: "Four" } },
-                            [_vm._v("❤")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.getReview.getRating,
-                                expression: "getReview.getRating"
-                              }
-                            ],
-                            attrs: {
-                              type: "radio",
-                              id: "heart_3",
-                              name: "like",
-                              value: "3"
-                            },
-                            domProps: {
-                              checked: _vm._q(_vm.getReview.getRating, "3")
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(_vm.getReview, "getRating", "3")
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "heart_3", title: "Three" } },
-                            [_vm._v("❤")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.getReview.getRating,
-                                expression: "getReview.getRating"
-                              }
-                            ],
-                            attrs: {
-                              type: "radio",
-                              id: "heart_2",
-                              name: "like",
-                              value: "2"
-                            },
-                            domProps: {
-                              checked: _vm._q(_vm.getReview.getRating, "2")
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(_vm.getReview, "getRating", "2")
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "heart_2", title: "Two" } },
-                            [_vm._v("❤")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.getReview.getRating,
-                                expression: "getReview.getRating"
-                              }
-                            ],
-                            attrs: {
-                              type: "radio",
-                              id: "heart_1",
-                              name: "like",
-                              value: "1"
-                            },
-                            domProps: {
-                              checked: _vm._q(_vm.getReview.getRating, "1")
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.$set(_vm.getReview, "getRating", "1")
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "heart_1", title: "One" } },
-                            [_vm._v("❤")]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
+          _c(
+            "form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: { submit: _vm.checkForm }
+            },
+            [
+              this.reviews.some(_vm.checkPost)
+                ? _c("div", { staticClass: "form-group" }, [
                     _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary float-right",
-                        on: {
-                          click: function($event) {
-                            return _vm.addNewReview()
-                          }
-                        }
-                      },
-                      [_vm._v("Submit")]
+                      "span",
+                      [
+                        _c("center", [
+                          _vm._v("You have already reviewed this organization.")
+                        ])
+                      ],
+                      1
                     )
                   ])
-                ])
-              ])
+                : _c("div", { staticClass: "form-group" }, [
+                    _c("h1", { staticClass: "txt-regular" }, [
+                      _vm._v("รีวิวให้กับสถานที่ฝึกงานนี้")
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.length
+                      ? _c("div", [
+                          _c("b", { staticClass: "text-validate" }, [
+                            _vm._v("Please correct the following error(s):")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "ul",
+                            _vm._l(_vm.errors, function(error) {
+                              return _c(
+                                "li",
+                                { staticClass: "text-validate" },
+                                [_vm._v(_vm._s(error))]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.getReview.getDescription,
+                          expression: "getReview.getDescription"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: { id: "exampleFormControlTextarea1", rows: "3" },
+                      domProps: { value: _vm.getReview.getDescription },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.getReview,
+                            "getDescription",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { attrs: { id: "ratings" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "rating", attrs: { id: "like" } },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.getReview.getRating,
+                                    expression: "getReview.getRating"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "radio",
+                                  id: "heart_5",
+                                  name: "like",
+                                  value: "5"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.getReview.getRating, "5")
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.$set(
+                                      _vm.getReview,
+                                      "getRating",
+                                      "5"
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "heart_5", title: "Five" } },
+                                [_vm._v("❤")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.getReview.getRating,
+                                    expression: "getReview.getRating"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "radio",
+                                  id: "heart_4",
+                                  name: "like",
+                                  value: "4"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.getReview.getRating, "4")
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.$set(
+                                      _vm.getReview,
+                                      "getRating",
+                                      "4"
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "heart_4", title: "Four" } },
+                                [_vm._v("❤")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.getReview.getRating,
+                                    expression: "getReview.getRating"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "radio",
+                                  id: "heart_3",
+                                  name: "like",
+                                  value: "3"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.getReview.getRating, "3")
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.$set(
+                                      _vm.getReview,
+                                      "getRating",
+                                      "3"
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "heart_3", title: "Three" } },
+                                [_vm._v("❤")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.getReview.getRating,
+                                    expression: "getReview.getRating"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "radio",
+                                  id: "heart_2",
+                                  name: "like",
+                                  value: "2"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.getReview.getRating, "2")
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.$set(
+                                      _vm.getReview,
+                                      "getRating",
+                                      "2"
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "heart_2", title: "Two" } },
+                                [_vm._v("❤")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.getReview.getRating,
+                                    expression: "getReview.getRating"
+                                  }
+                                ],
+                                attrs: {
+                                  type: "radio",
+                                  id: "heart_1",
+                                  name: "like",
+                                  value: "1"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.getReview.getRating, "1")
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.$set(
+                                      _vm.getReview,
+                                      "getRating",
+                                      "1"
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "heart_1", title: "One" } },
+                                [_vm._v("❤")]
+                              )
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary float-right",
+                            on: {
+                              click: function($event) {
+                                return _vm.addNewReview()
+                              }
+                            }
+                          },
+                          [_vm._v("Submit")]
+                        )
+                      ])
+                    ])
+                  ])
+            ]
+          )
         ])
       ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { attrs: { id: "map_canvas1" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

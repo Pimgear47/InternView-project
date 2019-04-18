@@ -1,10 +1,7 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
-      <img
-        :src="orgData.cover"
-        style="height: 100%; width: 100%; object-fit: contain;"
-      >
+      <img :src="orgData.cover" style="height: 100%; width: 100%; object-fit: contain;">
       <div class="container mt-4 mb-3">
         <a
           v-if="usernow.admin"
@@ -16,9 +13,6 @@
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
-      </div>
-      <div class="container">
-        <div id="map_canvas1"></div>
       </div>
       <div class="container mt-4 mb-3">
         <div class="row">
@@ -50,71 +44,79 @@
           <h1 class="txt-regular text-center">There aren’t any reviews for this organization yet.</h1>
         </div>
         <hr>
-        <div class="form-group" v-if="this.reviews.some(checkPost)">
-          <span>
-            <center>You have already reviewed this organization.</center>
-          </span>
-        </div>
-        <div class="form-group" v-else>
-          <h1 class="txt-regular">รีวิวให้กับสถานที่ฝึกงานนี้</h1>
-          <textarea
-            class="form-control mb-2"
-            id="exampleFormControlTextarea1"
-            rows="3"
-            v-model="getReview.getDescription"
-          ></textarea>
-          <div class="row">
-            <div class="col-md-6">
-              <div id="ratings">
-                <div id="like" class="rating">
-                  <input
-                    type="radio"
-                    id="heart_5"
-                    name="like"
-                    value="5"
-                    v-model="getReview.getRating"
-                  >
-                  <label for="heart_5" title="Five">&#10084;</label>
-                  <input
-                    type="radio"
-                    id="heart_4"
-                    name="like"
-                    value="4"
-                    v-model="getReview.getRating"
-                  >
-                  <label for="heart_4" title="Four">&#10084;</label>
-                  <input
-                    type="radio"
-                    id="heart_3"
-                    name="like"
-                    value="3"
-                    v-model="getReview.getRating"
-                  >
-                  <label for="heart_3" title="Three">&#10084;</label>
-                  <input
-                    type="radio"
-                    id="heart_2"
-                    name="like"
-                    value="2"
-                    v-model="getReview.getRating"
-                  >
-                  <label for="heart_2" title="Two">&#10084;</label>
-                  <input
-                    type="radio"
-                    id="heart_1"
-                    name="like"
-                    value="1"
-                    v-model="getReview.getRating"
-                  >
-                  <label for="heart_1" title="One">&#10084;</label>
+        <form @submit="checkForm" enctype="multipart/form-data">
+          <div class="form-group" v-if="this.reviews.some(checkPost)">
+            <span>
+              <center>You have already reviewed this organization.</center>
+            </span>
+          </div>
+          <div class="form-group" v-else>
+            <h1 class="txt-regular">รีวิวให้กับสถานที่ฝึกงานนี้</h1>
+            <div v-if="errors.length">
+              <b class="text-validate">Please correct the following error(s):</b>
+              <ul>
+                <li class="text-validate" v-for="error in errors">{{ error }}</li>
+              </ul>
+            </div>
+            <textarea
+              class="form-control mb-2"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              v-model="getReview.getDescription"
+            ></textarea>
+            <div class="row">
+              <div class="col-md-6">
+                <div id="ratings">
+                  <div id="like" class="rating">
+                    <input
+                      type="radio"
+                      id="heart_5"
+                      name="like"
+                      value="5"
+                      v-model="getReview.getRating"
+                    >
+                    <label for="heart_5" title="Five">&#10084;</label>
+                    <input
+                      type="radio"
+                      id="heart_4"
+                      name="like"
+                      value="4"
+                      v-model="getReview.getRating"
+                    >
+                    <label for="heart_4" title="Four">&#10084;</label>
+                    <input
+                      type="radio"
+                      id="heart_3"
+                      name="like"
+                      value="3"
+                      v-model="getReview.getRating"
+                    >
+                    <label for="heart_3" title="Three">&#10084;</label>
+                    <input
+                      type="radio"
+                      id="heart_2"
+                      name="like"
+                      value="2"
+                      v-model="getReview.getRating"
+                    >
+                    <label for="heart_2" title="Two">&#10084;</label>
+                    <input
+                      type="radio"
+                      id="heart_1"
+                      name="like"
+                      value="1"
+                      v-model="getReview.getRating"
+                    >
+                    <label for="heart_1" title="One">&#10084;</label>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <button class="btn btn-primary float-right" v-on:click="addNewReview()">Submit</button>
+              <div class="col-md-6">
+                <button class="btn btn-primary float-right" v-on:click="addNewReview()">Submit</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -125,6 +127,7 @@ export default {
   props: ["id", "usernow"],
   data() {
     return {
+      errors: [],
       reviews: [],
       orgData: [],
       getReview: {
@@ -137,8 +140,6 @@ export default {
   },
   mounted() {
     this.getData();
-    this.initialize();
-    google.maps.event.addDomListener(window, "load", initialize);
   },
   methods: {
     addNewReview() {
@@ -172,9 +173,7 @@ export default {
         this.getReview.getDescription = "";
         this.getReview.getRating = 0;
         alert("OK");
-      } else {
-        alert("Please Review and rate this");
-      }
+      } 
     },
     getData() {
       axios.get("/api/listorgs/" + this.id).then(response => {
@@ -193,15 +192,18 @@ export default {
     checkPost(Arr) {
       return Arr.user.id == this.usernow.id;
     },
-    initialize() {
-      var mapOptions = {
-        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
-        zoom: 15
-      };
-      var map = new google.maps.Map(
-        document.getElementById("map_canvas1"),
-        mapOptions
-      );
+    checkForm: function(e) {
+      if (this.getReview.getDescription && this.getReview.getRating) {
+        return true;
+      }
+      this.errors = [];
+      if (!this.getReview.getDescription) {
+        this.errors.push("Review required.");
+      }
+      if (!this.getReview.getRating) {
+        this.errors.push("Rating required.");
+      }
+      e.preventDefault();
     }
   }
 };

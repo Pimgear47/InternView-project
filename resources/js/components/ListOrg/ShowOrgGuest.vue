@@ -10,9 +10,6 @@
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
       </div>
-      <div class="container">
-        <div id="map_canvas1"></div>
-      </div>
       <div class="container mt-4 mb-3">
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
@@ -68,8 +65,6 @@ export default {
         name_org: "",
         headerpic: "",
         description: "",
-        Lat: "",
-        Lng: ""
       }
     };
   },
@@ -86,20 +81,6 @@ export default {
         };
       });
     });
-    this.initialize();
-    google.maps.event.addDomListener(window, "load", initialize);
   },
-  methods: {
-    initialize() {
-      var mapOptions = {
-        center: new google.maps.LatLng(this.orgData.Lat, this.orgData.Lng),
-        zoom: 15
-      };
-      var map = new google.maps.Map(
-        document.getElementById("map_canvas1"),
-        mapOptions
-      );
-    }
-  }
 };
 </script>
