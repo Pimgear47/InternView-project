@@ -3,7 +3,13 @@
     <div class="card col-md-11 border-0 shadow">
       <div class="container mt-5 mb-3">
         <h2 class="text-center title">ลงประกาศรับสมัครนักศึกษาฝึกงาน</h2>
-        <form action="/listannouncement">
+        <form action="/listannouncement" @submit="checkForm">
+          <div v-if="errors.length">
+            <b class="text-validate">Please correct the following error(s):</b>
+            <ul>
+              <li class="text-validate" v-for="error in errors">{{ error }}</li>
+            </ul>
+          </div>
           <div class="form-group">
             <label>หัวข้อ</label>
             <input
@@ -85,18 +91,15 @@
 export default {
   data() {
     return {
+      errors: [],
       title: "",
       name_org: "",
       announcer: "",
       detail: "",
-      ea: 0,
-      position: [],
-      quality: [],
-      duty: [],
       contact_person: "",
       tel_number: "",
       address: "",
-      email: "",
+      email: ""
     };
   },
   methods: {
@@ -123,6 +126,34 @@ export default {
         address: this.address,
         email: this.email
       });
+    },
+    checkForm: function(e) {
+      if (this.title && this.name_org && this.announcer && this.detail && this.contact_person && this.tel_number && this.address) {
+        return true;
+      }
+      this.errors = [];
+      if (!this.title) {
+        this.errors.push("Title required.");
+      }
+      if (!this.name_org) {
+        this.errors.push("Name required.");
+      }
+      if (!this.announcer) {
+        this.errors.push("Announcer required.");
+      }
+      if (!this.detail) {
+        this.errors.push("Detail required.");
+      }
+      if (!this.contact_person) {
+        this.errors.push("Person for contact required.");
+      }
+      if (!this.tel_number) {
+        this.errors.push("Telephone number required.");
+      }
+      if (!this.address) {
+        this.errors.push("Address required.");
+      }
+      e.preventDefault();
     }
   }
 };

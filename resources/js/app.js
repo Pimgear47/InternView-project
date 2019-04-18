@@ -22,6 +22,8 @@ Vue.component('show-ann-user', require('./components/Announcement/ShowAnnUser.vu
 Vue.component('show-ann-guest', require('./components/Announcement/ShowAnnGuest.vue').default);
 Vue.component('edit-ann', require('./components/Announcement/Edit.vue').default);
 
+Vue.component('contact', require('./components/Contact.vue').default);
+
 const app = new Vue({
     el: '#app'
 });

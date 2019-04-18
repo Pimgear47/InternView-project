@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\ListOrg;
-use App\Review;
-use Illuminate\Support\Facades\Storage;
 
-class ListOrgController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,7 @@ class ListOrgController extends Controller
      */
     public function index()
     {
-        $listorgs=ListOrg::with('Review')->get();
-        return response()->json($listorgs);
+        return view('Page/contact');
     }
 
     /**
@@ -39,18 +34,7 @@ class ListOrgController extends Controller
      */
     public function store(Request $request)
     {
-        $listorg=new ListOrg();
-        $listorg->name_org=$request->get('name_orgS');
-        $listorg->description=$request->get('description');
-        $listorg->address=$request->get('address');
-        if ($request->get('image')){
-            $listorg->image=$request->get('image');
-        }
-        if ($request->get('cover')){
-            $listorg->cover=$request->get('cover');
-        }
-        $listorg->save();
-        return response()->json($listorg);
+        //
     }
 
     /**
@@ -61,9 +45,7 @@ class ListOrgController extends Controller
      */
     public function show($id)
     {
-        $Reviews=Review::with('User')->where('org_id',$id)->get();
-        $listorg=ListOrg::find($id);
-        return response()->json(['ListOrg' => $listorg,'Review' => $Reviews]);
+        //
     }
 
     /**
@@ -74,7 +56,7 @@ class ListOrgController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -86,12 +68,7 @@ class ListOrgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $listorg=ListOrg::find($id);
-        $listorg->name_org = $request->get('name_org');
-        $listorg->description=$request->get('description');
-        $listorg->address=$request->get('address');
-        $listorg->update();
-        return response()->json($listorg);
+        //
     }
 
     /**
@@ -102,8 +79,6 @@ class ListOrgController extends Controller
      */
     public function destroy($id)
     {
-        $listorg=ListOrg::find($id);
-        $listorg->delete();
-        return response()->json($listorg);
+        //
     }
 }

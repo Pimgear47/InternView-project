@@ -16,6 +16,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Map -->
     <script type="text/javascript"
@@ -54,14 +56,15 @@
                         <?php if($page == 'listannouncement'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
                         <a class="nav-link" href="/listannouncement">Announcement</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                    <li
+                        <?php if($page == 'contact'){ echo ' class="nav-item active"';} else{echo ' class="nav-item "';}?>>
+                        <a class="nav-link" href="/contact">Contact</a>
                     </li>
                     <li class="nav-item">
                         @if (Route::has('login'))
                         <div class="top-right links">
                             @auth
-                    <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

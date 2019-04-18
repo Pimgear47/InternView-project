@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
       <img
-        :src="'../images/data/List/' + orgData.headerpic"
+        :src="orgData.cover"
         style="height: 100%; width: 100%; object-fit: contain;"
       >
       <div class="container mt-4 mb-3">
