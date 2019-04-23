@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.9"
     },
     "dependencies": {
-        "trumbowyg": "^2.15.1"
+        "trumbowyg": "^2.15.1",
+        "vue-multiselect": "^2.1.4"
     }
 }

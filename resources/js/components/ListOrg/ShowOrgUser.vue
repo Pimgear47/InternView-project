@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
       <img :src="orgData.cover" style="height: 100%; width: 100%; object-fit: contain;">
-      <div class="container mt-4 mb-3">
+      <div class="container mt-4 mb-2">
         <a
           v-if="usernow.admin"
           :href="'/listorgs/'+ id +'/edit'"
@@ -14,7 +14,7 @@
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
       </div>
-      <div class="container mt-4 mb-3">
+      <div class="container mt-1 mb-3">
         <div class="row">
           <div class="col-md-2" v-if="usernow.admin"></div>
         </div>
@@ -173,7 +173,7 @@ export default {
         this.getReview.getDescription = "";
         this.getReview.getRating = 0;
         alert("OK");
-      } 
+      }
     },
     getData() {
       axios.get("/api/listorgs/" + this.id).then(response => {
@@ -204,6 +204,11 @@ export default {
         this.errors.push("Rating required.");
       }
       e.preventDefault();
+    },
+    ArrTag(ListOrg) {
+      var tagType = [];
+      tagType = ListOrg.type.split(",");
+      return tagType.splice(1);
     }
   }
 };

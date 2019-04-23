@@ -1,16 +1,13 @@
 <template>
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
-      <img
-        :src="orgData.cover"
-        style="height: 100%; width: 100%; object-fit: contain;"
-      >
-      <div class="container mt-4 mb-3">
+      <img :src="orgData.cover" style="height: 100%; width: 100%; object-fit: contain;">
+      <div class="container mt-4 mb-2">
         <h2 class="title">{{orgData.name_org}}</h2>
         <h2 class="txt-regular">{{orgData.description}}</h2>
         <h2 class="txt-regular">ที่อยู่ : {{orgData.address}}</h2>
       </div>
-      <div class="container mt-4 mb-3">
+      <div class="container mt-1 mb-3">
         <hr>
         <div v-if="reviews.length != 0" id="columns-holder">
           <div class="box" v-for="review in reviews.slice().reverse()" :key="review.review_id">
@@ -64,7 +61,7 @@ export default {
       orgData: {
         name_org: "",
         headerpic: "",
-        description: "",
+        description: ""
       }
     };
   },
@@ -82,5 +79,12 @@ export default {
       });
     });
   },
+  methods: {
+    ArrTag(ListOrg) {
+      var tagType = [];
+      tagType = ListOrg.type.split(",");
+      return tagType.splice(1);
+    }
+  }
 };
 </script>

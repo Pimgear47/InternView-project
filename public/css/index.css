@@ -368,3 +368,51 @@ body {
     height: 30px;
     text-align: center;
 }
+
+.posttags {
+    list-style: none;
+}
+
+.posttags li {
+    background: #eee;
+    border-radius: 0 20px 20px 0;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    margin: 1em 0.7em;
+    padding: 5px 5px 5px 20px;
+    position: relative;
+    text-align: left;
+    width: 80px;
+    box-sizing: content-box;
+}
+
+.posttags li:before {
+    content: "";
+    float: left;
+    position: absolute;
+    top: 0;
+    left: -17px;
+    width: 0;
+    height: 0;
+    border-color: transparent #eee transparent transparent;
+    border-style: solid;
+    border-width: 17px 17px 17px 0;
+    box-sizing: content-box;
+}
+
+.posttags li:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 2px;
+    float: left;
+    width: 6px;
+    height: 6px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: -1px -1px 2px #004977;
+    box-sizing: content-box;
+}

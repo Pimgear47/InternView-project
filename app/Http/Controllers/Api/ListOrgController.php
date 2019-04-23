@@ -91,6 +91,13 @@ class ListOrgController extends Controller
         $listorg->name_org = $request->get('name_org');
         $listorg->description=$request->get('description');
         $listorg->address=$request->get('address');
+        if ($request->get('image')){
+            $listorg->image=$request->get('image');
+        }
+        if ($request->get('cover')){
+            $listorg->cover=$request->get('cover');
+        }
+        $listorg->type=$request->get('type');
         $listorg->update();
         return response()->json($listorg);
     }
