@@ -10,7 +10,7 @@
             <a
               href="/listannouncement/create"
               class="btn btn-primary float-right"
-              role="button"
+              role="button" data-micron="blink"
             >ประกาศรับสมัคร</a>
           </h2>
         </div>
@@ -46,7 +46,7 @@
                 <a
                     href="javascript:;"
                     class="btn btn-sm btn-danger float-right Del"
-                    role="button"
+                    role="button" data-micron="blink"
                     v-on:click="deleteAnn(ListAnn.id,index)"
                   >Delete</a>
               </div>

@@ -39494,6 +39494,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
+                    attrs: { "data-micron": "blink" },
                     on: {
                       click: function($event) {
                         return _vm.addNewAnn()
@@ -39704,6 +39705,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-primary",
+                  attrs: { "data-micron": "blink" },
                   on: {
                     click: function($event) {
                       return _vm.updateUser()
@@ -39806,7 +39808,11 @@ var render = function() {
                         "a",
                         {
                           staticClass: "btn btn-sm btn-danger float-right Del",
-                          attrs: { href: "javascript:;", role: "button" },
+                          attrs: {
+                            href: "javascript:;",
+                            role: "button",
+                            "data-micron": "blink"
+                          },
                           on: {
                             click: function($event) {
                               return _vm.deleteAnn(ListAnn.id, index)
@@ -39874,7 +39880,11 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "btn btn-primary float-right",
-            attrs: { href: "/listannouncement/create", role: "button" }
+            attrs: {
+              href: "/listannouncement/create",
+              role: "button",
+              "data-micron": "blink"
+            }
           },
           [_vm._v("ประกาศรับสมัคร")]
         )
@@ -40022,7 +40032,11 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "btn btn-primary float-right",
-            attrs: { href: "/listannouncement/create", role: "button" }
+            attrs: {
+              href: "/listannouncement/create",
+              role: "button",
+              "data-micron": "blink"
+            }
           },
           [_vm._v("ประกาศรับสมัคร")]
         )
@@ -40161,7 +40175,8 @@ var render = function() {
                       staticClass: "btn btn-sm btn-warning float-right",
                       attrs: {
                         href: "/listannouncement/" + _vm.id + "/edit",
-                        role: "button"
+                        role: "button",
+                        "data-micron": "blink"
                       }
                     },
                     [_vm._v("Edit")]
@@ -40743,6 +40758,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
+                    attrs: { "data-micron": "blink" },
                     on: {
                       click: function($event) {
                         return _vm.addNewOrg()
@@ -40933,6 +40949,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-primary",
+                  attrs: { "data-micron": "blink" },
                   on: {
                     click: function($event) {
                       return _vm.updateUser()
@@ -41012,7 +41029,11 @@ var render = function() {
                             "a",
                             {
                               staticClass: "btn btn-sm btn-danger float-right",
-                              attrs: { href: "javascript:;", role: "button" },
+                              attrs: {
+                                href: "javascript:;",
+                                role: "button",
+                                "data-micron": "blink"
+                              },
                               on: {
                                 click: function($event) {
                                   return _vm.deleteOrg(ListOrg.id, index)
@@ -41663,7 +41684,8 @@ var render = function() {
                   staticClass: "btn btn-sm btn-warning float-right",
                   attrs: {
                     href: "/listorgs/" + _vm.id + "/edit",
-                    role: "button"
+                    role: "button",
+                    "data-micron": "blink"
                   }
                 },
                 [_vm._v("Edit")]
@@ -42013,6 +42035,7 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn btn-primary float-right",
+                            attrs: { "data-micron": "blink" },
                             on: {
                               click: function($event) {
                                 return _vm.addNewReview()

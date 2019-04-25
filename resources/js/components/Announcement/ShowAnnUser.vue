@@ -8,7 +8,7 @@
             <a
               :href="'/listannouncement/'+ id +'/edit'"
               class="btn btn-sm btn-warning float-right"
-              role="button"
+              role="button" data-micron="blink"
             >Edit</a>
           </div>
         </div>

@@ -34,7 +34,7 @@
             <input type="text" class="form-control" v-model="address">
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" v-on:click="updateUser()">Update</button>
+            <button class="btn btn-primary" v-on:click="updateUser()" data-micron="blink">Update</button>
           </div>
         </form>
       </div>

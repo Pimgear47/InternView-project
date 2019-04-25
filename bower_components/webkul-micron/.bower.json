@@ -1,0 +1,37 @@
+{
+  "name": "webkul-micron",
+  "homepage": "https://webkul.github.io/micron/",
+  "authors": [
+    "Nitish Kumar <nitishkmrk@gmail.com>"
+  ],
+  "description": "a microInteraction library built with CSS Animations and controlled by JavaScript Power Edit",
+  "main": "script/micron.js",
+  "keywords": [
+    "micron",
+    "micronjs",
+    "micro interaction",
+    "microinteraction library",
+    "micro interaction css",
+    "micro interaction js",
+    "interaction js",
+    "ui interaction js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "c46d1bd8f0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c46d1bd8f0cadddc635692bd61a1a0b2effaf987"
+  },
+  "_source": "https://github.com/webkul/micron.git",
+  "_target": "*",
+  "_originalSource": "webkul-micron",
+  "_direct": true
+}

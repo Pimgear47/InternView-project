@@ -49,7 +49,7 @@
             <label for="Network">Network</label>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" v-on:click="addNewOrg()">Save</button>
+            <button class="btn btn-primary" v-on:click="addNewOrg()" data-micron="blink">Save</button>
           </div>
         </form>
       </div>

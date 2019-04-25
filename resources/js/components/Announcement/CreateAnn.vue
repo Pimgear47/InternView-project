@@ -79,7 +79,7 @@
             >
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" v-on:click="addNewAnn()">Save Here</button>
+            <button class="btn btn-primary" v-on:click="addNewAnn()" data-micron="blink">Save Here</button>
           </div>
         </form>
       </div>

@@ -7,7 +7,7 @@
           v-if="usernow.admin"
           :href="'/listorgs/'+ id +'/edit'"
           class="btn btn-sm btn-warning float-right"
-          role="button"
+          role="button" data-micron="blink"
         >Edit</a>
 
         <h2 class="title">{{orgData.name_org}}</h2>
@@ -112,7 +112,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <button class="btn btn-primary float-right" v-on:click="addNewReview()">Submit</button>
+                <button class="btn btn-primary float-right" v-on:click="addNewReview()" data-micron="blink">Submit</button>
               </div>
             </div>
           </div>

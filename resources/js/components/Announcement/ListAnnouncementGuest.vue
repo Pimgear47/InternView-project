@@ -10,7 +10,7 @@
             <a
               href="/listannouncement/create"
               class="btn btn-primary float-right"
-              role="button"
+              role="button" data-micron="blink"
             >ประกาศรับสมัคร</a>
           </h2>
         </div>

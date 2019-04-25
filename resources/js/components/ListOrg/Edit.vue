@@ -38,7 +38,7 @@
             <multiselect v-model="Type" :options="options" :taggable="true" :multiple="true"></multiselect>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" v-on:click="updateUser()">Update</button>
+            <button class="btn btn-primary" v-on:click="updateUser()" data-micron="blink">Update</button>
           </div>
         </form>
       </div>
