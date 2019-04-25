@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
       <div class="container mt-3">
-        <h2 class="text-center title">แก้ไขข้อมูล</h2>
+        <h2 class="text-center title w3-animate-right">แก้ไขข้อมูล</h2>
         <form :action="'/listorgs/'+id">
           <div class="form-group">
             <label>name_org:</label>
@@ -34,7 +34,7 @@
             <input type="text" class="form-control" v-model="address">
           </div>
           <div class="form-group">
-            <label>type: {{this.typeUpdate}}</label>
+            <label>type: </label>
             <multiselect v-model="Type" :options="options" :taggable="true" :multiple="true"></multiselect>
           </div>
           <div class="form-group">

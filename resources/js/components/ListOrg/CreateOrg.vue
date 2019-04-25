@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow pl-5 pr-5 pb-3">
       <div class="container mt-5 mb-3">
-        <h2 class="text-center title">เพิ่มข้อมูล</h2>
+        <h2 class="text-center title w3-animate-right">เพิ่มข้อมูล</h2>
         <form action="/listorgs" @submit="checkForm" enctype="multipart/form-data">
           <div v-if="errors.length">
             <b class="text-validate">Please correct the following error(s):</b>
@@ -12,7 +12,7 @@
           </div>
           <div class="form-group">
             <label>name_org:</label>
-            <input type="text" class="form-control" v-model="name_org">
+            <input type="text" class="form-control" v-model="name_org"  placeholder="ชื่อบริษัทหรือองค์กร">
           </div>
           <div class="form-group">
             <label>logo image:</label>
@@ -32,21 +32,16 @@
               class="form-control mb-2"
               id="exampleFormControlTextarea1"
               rows="5"
-              v-model="description"
+              v-model="description"  placeholder="คำอธิบายสำหรับบริษัทหรือองค์กร"
             ></textarea>
           </div>
           <div class="form-group">
             <label>address:</label>
-            <input type="text" class="form-control" v-model="address">
+            <input type="text" class="form-control" v-model="address"  placeholder="ที่อยู่">
           </div>
           <div class="form-group">
-            <label>Type:&nbsp;&nbsp;</label>
-            <input type="checkbox" id="Software" value="software" v-model="Type">
-            <label for="Software">Software</label>
-            <input type="checkbox" id="Hardware" value="hardware" v-model="Type">
-            <label for="Hardware">Hardware</label>
-            <input type="checkbox" id="Network" value="network" v-model="Type">
-            <label for="Network">Network</label>
+            <label>type: </label>
+            <multiselect v-model="Type" :options="options" :taggable="true" :multiple="true"  placeholder="เลือกประเภทของการฝึกงาน"></multiselect>
           </div>
           <div class="form-group">
             <button class="btn btn-primary" v-on:click="addNewOrg()" data-micron="blink">Save</button>
@@ -58,22 +53,27 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
 export default {
+  components: { Multiselect },
   data() {
     return {
       errors: [],
-      Type: ['All'],
+      Type: [],
       name_org: "",
       description: "",
       address: "",
       image: "",
       cover: "",
       checkPic: false,
-      checkCover: false
+      checkCover: false,
+      options: ['software', 'hardware', 'network'],
     };
   },
   methods: {
     addNewOrg() {
+      this.Type.unshift('All')
       axios
         .post("/api/listorgs", {
           name_orgS: this.name_org,

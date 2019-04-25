@@ -3,7 +3,7 @@
     <div class="card border-0 shadow">
       <div class="container mt-5 mb-3">
         <div class="row">
-          <div class="col-md-10"><h3>{{this.title}}</h3></div>
+          <div class="col-md-10 w3-animate-right"><h3>{{this.title}}</h3></div>
           <div class="col-md-2" v-if="usernow.admin">
             <a
               :href="'/listannouncement/'+ id +'/edit'"

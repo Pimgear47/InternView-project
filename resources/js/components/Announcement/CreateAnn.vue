@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card col-md-11 border-0 shadow">
       <div class="container mt-5 mb-3">
-        <h2 class="text-center title">ลงประกาศรับสมัครนักศึกษาฝึกงาน</h2>
+        <h2 class="text-center title w3-animate-right">ลงประกาศรับสมัครนักศึกษาฝึกงาน</h2>
         <form action="/listannouncement" @submit="checkForm">
           <div v-if="errors.length">
             <b class="text-validate">Please correct the following error(s):</b>

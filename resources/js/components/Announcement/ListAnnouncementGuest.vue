@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow pt-5 pl-5 pr-5 pb-3">
       <div class="row mb-3">
-        <div class="col-md-10">
+        <div class="col-md-10 w3-animate-right">
           <h2>ประกาศรับนักศึกษาฝึกงาน</h2>
         </div>
         <div class="col-md-2">
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-md-8 col-lg-9">
               <div
-                class="card-wo-r shadow col-lg-12 p-2 mb-2"
+                class="card-wo-r shadow col-lg-12 p-2 mb-2 box-render"
                 v-for="(ListAnn) in filteredAnns"
                 :key="ListAnn.id"
               >
@@ -46,7 +46,7 @@
               </div>
             </div>
             <div class="col-md-4 col-lg-3 float-right mb-2">
-              <div class="card-wo-r shadow p-3">
+              <div class="card-wo-r shadow p-3 w3-animate-bottom">
                 <p class="title">Search :</p>
                 <input v-model="search" type="text" class="form-control mb-3" placeholder="Search">
               </div>

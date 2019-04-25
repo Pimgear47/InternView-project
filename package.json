@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "trumbowyg": "^2.15.1",
+        "vhs": "^0.2.0",
         "vue-multiselect": "^2.1.4",
         "webkul-micron": "^1.1.6"
     }

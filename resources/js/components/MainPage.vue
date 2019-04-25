@@ -3,8 +3,8 @@
     <div class="card border-0 shadow">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-6">
-          <div class="card-body pt-5 pl-5 pr-5">
-            <h1 class="title">
+          <div class="card-body pt-5 pl-5 pr-5 body-flex">
+            <h1 class="title w3-animate-top">
               CPE
               <br>INTERNVIEW
             </h1>
@@ -12,14 +12,15 @@
               แหล่งรวบรวมประสบการณ์การฝึกงาน ตามสถานที่หรือองค์กรต่างๆ
               สำหรับเป็นข้อมูลประกอบการตัดสินใจเลือกสถานที่ฝึกงานแก่นักศึกษาวิศวกรรมคอมพิวเตอร์ชั้นปีที่ 3
               หรือผู้ที่สนใจ
-            </h2><br>
-            <a href="/listorgs" role="button" class="btn glowButton">GET STARTED</a>
+            </h2>
+            <br>
+            <a href="/listorgs" role="button" class="btn glowButton" data-micron="blink">GET STARTED</a>
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="card-body p-3">
             <p class="mt-5 p-3" style="text-align:center;">
-              <img src="images/page_welcome/Group 262.png" height="100%" width="100%">
+              <img class="w3-animate-zoom" src="images/page_welcome/Group 262.png" height="100%" width="100%">
             </p>
           </div>
         </div>

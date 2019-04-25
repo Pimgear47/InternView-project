@@ -2565,6 +2565,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2619,27 +2621,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
+
+Vue.component('multiselect', vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   data: function data() {
     return {
       errors: [],
-      Type: ['All'],
+      Type: [],
       name_org: "",
       description: "",
       address: "",
       image: "",
       cover: "",
       checkPic: false,
-      checkCover: false
+      checkCover: false,
+      options: ['software', 'hardware', 'network']
     };
   },
   methods: {
     addNewOrg: function addNewOrg() {
+      this.Type.unshift('All');
       axios.post("/api/listorgs", {
         name_orgS: this.name_org,
         description: this.description,
@@ -3015,7 +3019,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       return this.ListOrgs.filter(function (ListOrg) {
-        return ListOrg.name_org.match(_this3.search) && _this3.CalRating(ListOrg) >= parseInt(_this3.rating_s) && ListOrg.type.match(_this3.type);
+        return ListOrg.name_org.toLowerCase().match(_this3.search.toLowerCase()) && _this3.CalRating(ListOrg) >= parseInt(_this3.rating_s) && ListOrg.type.match(_this3.type);
       });
     }
   }
@@ -3154,7 +3158,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.ListOrgs.filter(function (ListOrg) {
-        return ListOrg.name_org.match(_this2.search) && _this2.CalRating(ListOrg) >= parseInt(_this2.rating_s) && ListOrg.type.match(_this2.type);
+        return ListOrg.name_org.toLowerCase().match(_this2.search.toLowerCase()) && _this2.CalRating(ListOrg) >= parseInt(_this2.rating_s) && ListOrg.type.match(_this2.type);
       });
     }
   }
@@ -3502,6 +3506,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -39233,7 +39238,7 @@ var render = function() {
     [
       _c("div", { staticClass: "card col-md-11 border-0 shadow" }, [
         _c("div", { staticClass: "container mt-5 mb-3" }, [
-          _c("h2", { staticClass: "text-center title" }, [
+          _c("h2", { staticClass: "text-center title w3-animate-right" }, [
             _vm._v("ลงประกาศรับสมัครนักศึกษาฝึกงาน")
           ]),
           _vm._v(" "),
@@ -39539,7 +39544,7 @@ var render = function() {
     [
       _c("div", { staticClass: "card border-0 shadow" }, [
         _c("div", { staticClass: "container mt-3" }, [
-          _c("h2", { staticClass: "text-center title" }, [
+          _c("h2", { staticClass: "text-center title w3-animate-right" }, [
             _vm._v("แก้ไขข้อมูล")
           ]),
           _vm._v(" "),
@@ -39763,7 +39768,8 @@ var render = function() {
                     "div",
                     {
                       key: ListAnn.id,
-                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+                      staticClass:
+                        "card-wo-r shadow col-lg-12 p-2 mb-2 box-render"
                     },
                     [
                       _c("div", { staticClass: "row pl-4 pr-4" }, [
@@ -39828,31 +39834,35 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
-                _c("div", { staticClass: "card-wo-r shadow p-3" }, [
-                  _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search,
-                        expression: "search"
-                      }
-                    ],
-                    staticClass: "form-control mb-3",
-                    attrs: { type: "text", placeholder: "Search" },
-                    domProps: { value: _vm.search },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c(
+                  "div",
+                  { staticClass: "card-wo-r shadow p-3 w3-animate-bottom" },
+                  [
+                    _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
                         }
-                        _vm.search = $event.target.value
+                      ],
+                      staticClass: "form-control mb-3",
+                      attrs: { type: "text", placeholder: "Search" },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
                       }
-                    }
-                  })
-                ])
+                    })
+                  ]
+                )
               ])
             ])
           ])
@@ -39866,7 +39876,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-10" }, [
+    return _c("div", { staticClass: "col-md-10 w3-animate-right" }, [
       _c("h2", [_vm._v("ประกาศรับนักศึกษาฝึกงาน")])
     ])
   },
@@ -39933,7 +39943,8 @@ var render = function() {
                     "div",
                     {
                       key: ListAnn.id,
-                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+                      staticClass:
+                        "card-wo-r shadow col-lg-12 p-2 mb-2 box-render"
                     },
                     [
                       _c("div", { staticClass: "row pl-4 pr-4" }, [
@@ -39980,31 +39991,35 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
-                _c("div", { staticClass: "card-wo-r shadow p-3" }, [
-                  _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search,
-                        expression: "search"
-                      }
-                    ],
-                    staticClass: "form-control mb-3",
-                    attrs: { type: "text", placeholder: "Search" },
-                    domProps: { value: _vm.search },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c(
+                  "div",
+                  { staticClass: "card-wo-r shadow p-3 w3-animate-bottom" },
+                  [
+                    _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
                         }
-                        _vm.search = $event.target.value
+                      ],
+                      staticClass: "form-control mb-3",
+                      attrs: { type: "text", placeholder: "Search" },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
                       }
-                    }
-                  })
-                ])
+                    })
+                  ]
+                )
               ])
             ])
           ])
@@ -40018,7 +40033,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-10" }, [
+    return _c("div", { staticClass: "col-md-10 w3-animate-right" }, [
       _c("h2", [_vm._v("ประกาศรับนักศึกษาฝึกงาน")])
     ])
   },
@@ -40072,7 +40087,7 @@ var render = function() {
       _c("div", { staticClass: "card border-0 shadow" }, [
         _c("div", { staticClass: "container mt-5 mb-3" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-10" }, [
+            _c("div", { staticClass: "col-md-10 w3-animate-right" }, [
               _c("h3", [_vm._v(_vm._s(this.title))])
             ])
           ]),
@@ -40163,7 +40178,7 @@ var render = function() {
       _c("div", { staticClass: "card border-0 shadow" }, [
         _c("div", { staticClass: "container mt-5 mb-3" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-10" }, [
+            _c("div", { staticClass: "col-md-10 w3-animate-right" }, [
               _c("h3", [_vm._v(_vm._s(this.title))])
             ]),
             _vm._v(" "),
@@ -40282,7 +40297,9 @@ var staticRenderFns = [
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-10" }, [
                     _c("div", { staticClass: "contact" }, [
-                      _c("h1", [_vm._v("Contact us")]),
+                      _c("h1", { staticClass: "w3-animate-right" }, [
+                        _vm._v("Contact us")
+                      ]),
                       _vm._v(" "),
                       _c("ul", [
                         _c("li", [
@@ -40360,6 +40377,7 @@ var staticRenderFns = [
                   },
                   [
                     _c("img", {
+                      staticClass: "w3-animate-zoom",
                       attrs: {
                         src: "images/page_contact/Group 106.png",
                         height: "100%",
@@ -40472,7 +40490,7 @@ var render = function() {
     [
       _c("div", { staticClass: "card border-0 shadow pl-5 pr-5 pb-3" }, [
         _c("div", { staticClass: "container mt-5 mb-3" }, [
-          _c("h2", { staticClass: "text-center title" }, [
+          _c("h2", { staticClass: "text-center title w3-animate-right" }, [
             _vm._v("เพิ่มข้อมูล")
           ]),
           _vm._v(" "),
@@ -40514,7 +40532,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { type: "text", placeholder: "ชื่อบริษัทหรือองค์กร" },
                   domProps: { value: _vm.name_org },
                   on: {
                     input: function($event) {
@@ -40578,7 +40596,11 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control mb-2",
-                  attrs: { id: "exampleFormControlTextarea1", rows: "5" },
+                  attrs: {
+                    id: "exampleFormControlTextarea1",
+                    rows: "5",
+                    placeholder: "คำอธิบายสำหรับบริษัทหรือองค์กร"
+                  },
                   domProps: { value: _vm.description },
                   on: {
                     input: function($event) {
@@ -40604,7 +40626,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { type: "text", placeholder: "ที่อยู่" },
                   domProps: { value: _vm.address },
                   on: {
                     input: function($event) {
@@ -40617,141 +40639,30 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Type:  ")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", [_vm._v("type: ")]),
+                  _vm._v(" "),
+                  _c("multiselect", {
+                    attrs: {
+                      options: _vm.options,
+                      taggable: true,
+                      multiple: true,
+                      placeholder: "เลือกประเภทของการฝึกงาน"
+                    },
+                    model: {
                       value: _vm.Type,
+                      callback: function($$v) {
+                        _vm.Type = $$v
+                      },
                       expression: "Type"
                     }
-                  ],
-                  attrs: {
-                    type: "checkbox",
-                    id: "Software",
-                    value: "software"
-                  },
-                  domProps: {
-                    checked: Array.isArray(_vm.Type)
-                      ? _vm._i(_vm.Type, "software") > -1
-                      : _vm.Type
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.Type,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "software",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.Type = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.Type = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.Type = $$c
-                      }
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "Software" } }, [
-                  _vm._v("Software")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Type,
-                      expression: "Type"
-                    }
-                  ],
-                  attrs: {
-                    type: "checkbox",
-                    id: "Hardware",
-                    value: "hardware"
-                  },
-                  domProps: {
-                    checked: Array.isArray(_vm.Type)
-                      ? _vm._i(_vm.Type, "hardware") > -1
-                      : _vm.Type
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.Type,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "hardware",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.Type = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.Type = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.Type = $$c
-                      }
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "Hardware" } }, [
-                  _vm._v("Hardware")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Type,
-                      expression: "Type"
-                    }
-                  ],
-                  attrs: { type: "checkbox", id: "Network", value: "network" },
-                  domProps: {
-                    checked: Array.isArray(_vm.Type)
-                      ? _vm._i(_vm.Type, "network") > -1
-                      : _vm.Type
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.Type,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "network",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.Type = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.Type = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.Type = $$c
-                      }
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "Network" } }, [_vm._v("Network")])
-              ]),
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c(
@@ -40803,7 +40714,7 @@ var render = function() {
     [
       _c("div", { staticClass: "card border-0 shadow" }, [
         _c("div", { staticClass: "container mt-3" }, [
-          _c("h2", { staticClass: "text-center title" }, [
+          _c("h2", { staticClass: "text-center title w3-animate-right" }, [
             _vm._v("แก้ไขข้อมูล")
           ]),
           _vm._v(" "),
@@ -40924,7 +40835,7 @@ var render = function() {
               "div",
               { staticClass: "form-group" },
               [
-                _c("label", [_vm._v("type: " + _vm._s(this.typeUpdate))]),
+                _c("label", [_vm._v("type: ")]),
                 _vm._v(" "),
                 _c("multiselect", {
                   attrs: {
@@ -41007,7 +40918,8 @@ var render = function() {
                     "div",
                     {
                       key: ListOrg.id,
-                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+                      staticClass:
+                        "card-wo-r shadow col-lg-12 p-2 mb-2 box-render"
                     },
                     [
                       _c("div", { staticClass: "row" }, [
@@ -41109,110 +41021,114 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
-                _c("div", { staticClass: "card-wo-r shadow p-3" }, [
-                  _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search,
-                        expression: "search"
-                      }
-                    ],
-                    staticClass: "form-control mb-3",
-                    attrs: { type: "text", placeholder: "Search" },
-                    domProps: { value: _vm.search },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c(
+                  "div",
+                  { staticClass: "card-wo-r shadow p-3 w3-animate-bottom" },
+                  [
+                    _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
                         }
-                        _vm.search = $event.target.value
+                      ],
+                      staticClass: "form-control mb-3",
+                      attrs: { type: "text", placeholder: "Search" },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "title", attrs: { for: "sel1" } },
-                      [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type))]
-                    ),
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { staticClass: "title", attrs: { for: "sel1" } },
+                        [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.type,
+                              expression: "type"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "sel1" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.type = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", [_vm._v("All")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("software")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("hardware")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("network")])
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.type,
-                            expression: "type"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "sel1" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.type = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
+                      "label",
+                      { staticClass: "title", attrs: { for: "customRange3" } },
+                      [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating_s))]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.rating_s,
+                          expression: "rating_s"
                         }
+                      ],
+                      staticClass: "custom-range",
+                      attrs: {
+                        type: "range",
+                        min: "0",
+                        max: "5",
+                        step: "1",
+                        id: "customRange3"
                       },
-                      [
-                        _c("option", [_vm._v("All")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("software")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("hardware")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("network")])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "title", attrs: { for: "customRange3" } },
-                    [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating_s))]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.rating_s,
-                        expression: "rating_s"
+                      domProps: { value: _vm.rating_s },
+                      on: {
+                        __r: function($event) {
+                          _vm.rating_s = $event.target.value
+                        }
                       }
-                    ],
-                    staticClass: "custom-range",
-                    attrs: {
-                      type: "range",
-                      min: "0",
-                      max: "5",
-                      step: "1",
-                      id: "customRange3"
-                    },
-                    domProps: { value: _vm.rating_s },
-                    on: {
-                      __r: function($event) {
-                        _vm.rating_s = $event.target.value
-                      }
-                    }
-                  })
-                ])
+                    })
+                  ]
+                )
               ])
             ])
           ])
@@ -41226,7 +41142,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-10" }, [
+    return _c("div", { staticClass: "col-md-10 w3-animate-right" }, [
       _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")])
     ])
   },
@@ -41240,7 +41156,11 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "btn btn-primary float-right",
-            attrs: { href: "/listorgs/create", role: "button" }
+            attrs: {
+              href: "/listorgs/create",
+              role: "button",
+              "data-micron": "blink"
+            }
           },
           [_vm._v("Add Data")]
         )
@@ -41287,7 +41207,8 @@ var render = function() {
                     "div",
                     {
                       key: ListOrg.id,
-                      staticClass: "card-wo-r shadow col-lg-12 p-2 mb-2"
+                      staticClass:
+                        "card-wo-r shadow col-lg-12 p-2 mb-2 box-render"
                     },
                     [
                       _c("div", { staticClass: "row" }, [
@@ -41371,110 +41292,114 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-4 col-lg-3 float-right mb-2" }, [
-                _c("div", { staticClass: "card-wo-r shadow p-3" }, [
-                  _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search,
-                        expression: "search"
-                      }
-                    ],
-                    staticClass: "form-control mb-3",
-                    attrs: { type: "text", placeholder: "Search" },
-                    domProps: { value: _vm.search },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c(
+                  "div",
+                  { staticClass: "card-wo-r shadow p-3 w3-animate-bottom" },
+                  [
+                    _c("p", { staticClass: "title" }, [_vm._v("Search :")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
                         }
-                        _vm.search = $event.target.value
+                      ],
+                      staticClass: "form-control mb-3",
+                      attrs: { type: "text", placeholder: "Search" },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "title", attrs: { for: "sel1" } },
-                      [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type))]
-                    ),
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { staticClass: "title", attrs: { for: "sel1" } },
+                        [_vm._v("สายงานที่สนใจ : " + _vm._s(_vm.type))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.type,
+                              expression: "type"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "sel1" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.type = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", [_vm._v("All")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("software")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("hardware")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("network")])
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.type,
-                            expression: "type"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "sel1" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.type = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
+                      "label",
+                      { staticClass: "title", attrs: { for: "customRange3" } },
+                      [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating_s))]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.rating_s,
+                          expression: "rating_s"
                         }
+                      ],
+                      staticClass: "custom-range",
+                      attrs: {
+                        type: "range",
+                        min: "0",
+                        max: "5",
+                        step: "1",
+                        id: "customRange3"
                       },
-                      [
-                        _c("option", [_vm._v("All")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("software")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("hardware")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("network")])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "title", attrs: { for: "customRange3" } },
-                    [_vm._v("Rating ขั้นต่ำ : " + _vm._s(_vm.rating_s))]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.rating_s,
-                        expression: "rating_s"
+                      domProps: { value: _vm.rating_s },
+                      on: {
+                        __r: function($event) {
+                          _vm.rating_s = $event.target.value
+                        }
                       }
-                    ],
-                    staticClass: "custom-range",
-                    attrs: {
-                      type: "range",
-                      min: "0",
-                      max: "5",
-                      step: "1",
-                      id: "customRange3"
-                    },
-                    domProps: { value: _vm.rating_s },
-                    on: {
-                      __r: function($event) {
-                        _vm.rating_s = $event.target.value
-                      }
-                    }
-                  })
-                ])
+                    })
+                  ]
+                )
               ])
             ])
           ])
@@ -41488,7 +41413,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-10" }, [
+    return _c("div", { staticClass: "col-md-10 w3-animate-right" }, [
       _c("h2", [_vm._v("รายชื่อบริษัทและองค์กร")])
     ])
   }
@@ -42090,8 +42015,8 @@ var staticRenderFns = [
         _c("div", { staticClass: "card border-0 shadow" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-sm-12 col-md-12 col-lg-6" }, [
-              _c("div", { staticClass: "card-body pt-5 pl-5 pr-5" }, [
-                _c("h1", { staticClass: "title" }, [
+              _c("div", { staticClass: "card-body pt-5 pl-5 pr-5 body-flex" }, [
+                _c("h1", { staticClass: "title w3-animate-top" }, [
                   _vm._v("\n            CPE\n            "),
                   _c("br"),
                   _vm._v("INTERNVIEW\n          ")
@@ -42102,13 +42027,18 @@ var staticRenderFns = [
                     "\n            แหล่งรวบรวมประสบการณ์การฝึกงาน ตามสถานที่หรือองค์กรต่างๆ\n            สำหรับเป็นข้อมูลประกอบการตัดสินใจเลือกสถานที่ฝึกงานแก่นักศึกษาวิศวกรรมคอมพิวเตอร์ชั้นปีที่ 3\n            หรือผู้ที่สนใจ\n          "
                   )
                 ]),
+                _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
                 _c(
                   "a",
                   {
                     staticClass: "btn glowButton",
-                    attrs: { href: "/listorgs", role: "button" }
+                    attrs: {
+                      href: "/listorgs",
+                      role: "button",
+                      "data-micron": "blink"
+                    }
                   },
                   [_vm._v("GET STARTED")]
                 )
@@ -42125,6 +42055,7 @@ var staticRenderFns = [
                   },
                   [
                     _c("img", {
+                      staticClass: "w3-animate-zoom",
                       attrs: {
                         src: "images/page_welcome/Group 262.png",
                         height: "100%",

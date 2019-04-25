@@ -7,7 +7,7 @@
             <div class="row">
               <div class="col-md-10">
                 <div class="contact">
-                  <h1>Contact us</h1>
+                  <h1 class="w3-animate-right">Contact us</h1>
                   <ul>
                     <li>
                         <i class="fa fa-phone"></i>
@@ -43,7 +43,7 @@
         <div class="col-sm-12 col-md-12 col-lg-7">
           <div class="card-body mt-5">
             <p class="mt-5 p-3 pr-5" style="text-align:center;">
-              <img src="images/page_contact/Group 106.png" height="100%" width="100%">
+              <img class="w3-animate-zoom" src="images/page_contact/Group 106.png" height="100%" width="100%">
             </p>
           </div>
         </div>

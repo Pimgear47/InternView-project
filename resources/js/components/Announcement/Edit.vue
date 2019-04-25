@@ -2,7 +2,7 @@
   <div class="container col-md-10 col-sm-9 col-lg-10 mb-5">
     <div class="card border-0 shadow">
       <div class="container mt-3">
-        <h2 class="text-center title">แก้ไขข้อมูล</h2>
+        <h2 class="text-center title w3-animate-right">แก้ไขข้อมูล</h2>
         <form :action="'/listannouncement/'+id">
           <div class="form-group">
             <label>title:</label>
